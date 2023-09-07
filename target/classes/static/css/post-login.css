@@ -1,0 +1,535 @@
+/*----------  Post-login Navbar  ----------*/
+
+/* Search Bar */
+.search-form {
+	margin: auto 1rem;
+	width: 50%;
+}
+
+.search-bar {
+	background-color: var(--bgMedium);
+	border: 2px solid transparent;
+	border-radius: 7px 0px 0px 7px;
+	color: var(--primary);
+	font-family: var(--pFont);
+	font-size: 1.1rem;
+	height: 52px;
+	margin: auto;
+	outline: none;
+	padding: 0.7rem 1.5rem;
+	width: 95%;
+}
+
+.search-btn {
+	background-color: var(--bgMedium);
+	border: 2px solid transparent;
+	border-radius: 0px 7px 7px 0px;
+	cursor: pointer;
+	height: 52px;
+	font-weight: bold;
+	margin: auto 0rem;
+	padding: 0rem 1rem;
+	transition: 0.2s ease-in-out;
+}
+.search-btn:hover {
+	color: var(--accent);
+}
+
+
+/*----------  Profile page ----------*/
+.profile-container {
+	align-items: start;
+	background-color: var(--bgDark);
+	border-radius: 5px;
+	display: flex;
+	gap: 2rem;
+	min-height: 350px;
+	padding: 2rem;
+}
+
+.profile-container .img-wrapper {
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+}
+
+.profile .img-wrapper img {
+	aspect-ratio: 1/1;
+	border-radius: 10px;
+	width: clamp(275px, 30vw, 400px);
+}
+
+
+.profile-details .name {
+	color: var(--white);
+	font-family: var(--hFont);
+	font-size: 1.75rem;
+	font-weight: bold;
+	margin-bottom: 1.5rem;
+}
+
+.profile-label {
+	align-items: center;
+	color: var(--accent);
+	display: flex;
+	font-family: var(--hFont);
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+}
+.profile-label i {
+	margin-right: 5px;
+}
+
+.profile-details p {
+	color: var(--bgMedium);
+	font-family: var(--pFont);
+	font-size: 1.25rem;
+	margin-bottom: 1rem;
+}
+
+.edit-profile-btn {
+	align-items: center;
+	background-color: var(--auth);
+	border: none;
+	border-radius: 5px;
+	color: var(--white);
+	cursor: pointer;
+	display: flex;
+	font-family: var(--pFont);
+	font-size: 1rem;
+	font-weight: bold;
+	justify-content: space-between;
+	margin: 1rem auto 0rem;
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+	padding: 0.7rem 1.25rem;
+	width: fit-content;
+	transition: 0.2s ease-out;
+}
+.edit-profile-btn:hover {
+	outline: 2px solid var(--auth);
+	outline-offset: 5px;
+}
+
+@media only screen and (max-width: 650px) {
+	.profile-container {
+	align-items: center;
+		flex-direction: column
+	}
+	.profile .img-wrapper {
+		flex-direction: column;
+		width: clamp(275px, 70vw, 500px);
+	}
+	.profile .img-wrapper div {
+		padding: 1rem;
+	}
+}
+
+/*----------  Order History  ----------*/
+.order-item {
+	background-color: var(--bgDark);
+	border-radius: 10px;
+	display: flex;
+	height: fit-content;
+	width: 100%;
+}
+
+.oi-details {
+	padding: 1rem;
+}
+.oi-details h3 {
+	color: var(--white);
+	font-family: var(--hFont);
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+.oi-details .amount, .oi-details .date {
+	color: var(--bgMedium);
+	font-family: var(--pFont);
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+.oi-details .price {
+	color: var(--accent);
+	font-family: var(--hFont);
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+
+.oi-actions {
+	display: flex;
+	gap: 1rem;
+	margin-top: 1rem;
+}
+.oi-actions button {
+	background-color: var(--accent);
+	border: 2px solid transparent;
+	border-radius: 5px;
+	color: var(--primary);
+	cursor: pointer;
+	display: block;
+	font-family: var(--hFont);
+	font-size: 0.8rem;
+	font-weight: bold;
+	padding: 5px 10px;
+	transition: 0.2s ease-in-out;
+}
+.oi-actions button:hover {
+	color: var(--white);
+}
+
+
+/*----------  Product Categories  ----------*/
+.category-selection {
+	background-color: var(--bgMedium);
+	border-radius: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+	margin: 1.5rem 0rem 1rem;
+	padding: 0.7rem 1rem;
+}
+
+.category-selection button {
+	background-color: transparent;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	color: var(--primary);
+	cursor: pointer;
+	font-family: var(--hFont);
+	font-size: 0.8rem;
+	font-weight: bold;
+	letter-spacing: 1px;
+	padding: 1rem 1rem;
+	transition: 0.2s ease-in-out;
+}
+.category-selection button:hover {
+	background-color: transparent;
+	border: 2px solid var(--accent);
+	color: var(--accent);
+}
+.category-selection button.default {
+	background-color: var(--accent);
+	color: var(--white);
+	
+}
+.category-selection button.default:hover {
+	background-color: transparent;
+	border: 2px solid var(--accent);
+	color: var(--accent);
+}
+
+/*----------  Product Listing  ----------*/
+.product-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 1.5rem;
+	margin: 2rem auto 3rem;
+  	width: 100%;
+}
+.product-card {
+	background-color: var(--bgDark);
+	border-radius: 3px;
+	width: 300px;
+  	min-height: 400px;
+}
+.card-img-wrapper {
+	border-radius: 5px;
+	display: block;
+	height: 275px;
+	margin: 13px auto;
+	overflow: hidden;
+	width: 275px;
+}
+.card-img-wrapper img {
+	cursor: pointer;
+	display: block;
+	object-fit: cover;
+	transition: 0.3s ease-in-out;
+}
+.card-img-wrapper img:hover {
+	transform: scale(1.1);
+}
+
+.product-card h3 {
+	color: var(--white);
+	font-family: var(--hFont);
+	font-weight: bold;
+	margin: 10px 15px;
+}
+
+.product-card .price {
+	color: var(--accent);
+	font-family: var(--hFont);
+	font-size: 1.1rem;
+	font-weight: bold;
+	margin: 10px 15px;
+}
+
+.add-to-cart {
+	align-items: center;
+	background-color: var(--accent);
+	border: none;
+	border-radius: 5px;
+	color: var(--white);
+	cursor: pointer;
+	display: flex;
+	font-family: var(--pFont);
+	font-size: 1rem;
+	font-weight: bold;
+	justify-content: space-between;
+	margin: 10px 15px 15px auto;
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+	padding: 7px 10px;
+	width: 130px;
+	transition: 0.2s ease-out;
+}
+.add-to-cart:hover {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+
+/*----------  Prouct Details  ----------*/
+.product-details-container {
+	align-items: start;
+	background-color: var(--bgDark);
+	border-radius: 5px;
+	display: flex;
+	gap: 2rem;
+	min-height: 400px;
+	padding: 2rem;
+}
+
+.img-wrapper {
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	width: fit-content;
+}
+
+.img-wrapper img {
+	aspect-ratio: 1/1;
+	border-radius: 10px;
+	width: clamp(275px, 30vw, 400px);
+}
+
+.img-wrapper .stock {
+	color: var(--bgMedium);
+	font-family: var(--pFont);
+	font-size: 1rem;
+	letter-spacing: 1px;
+}
+
+.img-wrapper .price {
+	color: var(--accent);
+	font-family: var(--pFont);
+	font-size: 2rem;
+}
+
+.product-details .name {
+	color: var(--white);
+	font-family: var(--hFont);
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+
+.product-details .desc {
+	color: var(--bgMedium);
+	font-family: var(--pFont);
+	font-size: 1.1rem;
+}
+
+
+/*----------  Cart  ----------*/
+.cart-wrapper {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1.5rem;
+	justify-content: center;
+	padding: 2rem;
+}
+
+/* Cart Items */
+.item-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1.5rem;
+  	width: 600px;
+}
+
+.cart-item {
+	background-color: var(--bgDark);
+	border-radius: 10px;
+	display: flex;
+	height: 225px;
+}
+
+.ci-img-wrapper {
+	border-radius: 5px;
+	display: block;
+	height: 200px;
+	margin: auto 13px;
+	overflow: hidden;
+	width: 200px;
+}
+.ci-img-wrapper img {
+	object-fit: cover;
+}
+.ci-img-wrapper img:hover {
+	transform: scale(1.05);
+}
+
+.ci-details {
+	padding: 14px;
+}
+
+.ci-details h3 {
+	color: var(--white);
+	font-family: var(--hFont);
+	font-size: 1.25rem;
+	font-weight: bold;
+}
+.ci-details .amount, .ci-details .date {
+	color: var(--bgMedium);
+	font-family: var(--pFont);
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+.ci-details .price {
+	color: var(--accent);
+	font-family: var(--hFont);
+	font-size: 1.1rem;
+	font-weight: bold;
+}
+
+.ci-actions {
+	display: flex;
+	gap: 1rem;
+	margin-top: clamp(1rem, 5rem, 6rem);
+}
+.ci-actions button {
+	background-color: var(--accent);
+	border: 2px solid transparent;
+	border-radius: 5px;
+	color: var(--primary);
+	cursor: pointer;
+	display: block;
+	font-family: var(--hFont);
+	font-size: 0.8rem;
+	font-weight: bold;
+	padding: 5px 10px;
+	transition: 0.2s ease-in-out;
+}
+.cart-actions button:hover {
+	color: var(--white);
+}
+
+/* Cart Details */
+.cart-details {
+	display: block;
+	background-color: var(--bgDark);
+	border-radius: 10px;
+	width: 300px;
+	height: fit-content;
+}
+
+.item-details:first-child {
+	margin-top: 1rem;
+}
+
+.item-details p {
+	color: var(--white);
+	font-family: var(--pFont);
+	margin: 0.5rem auto; 
+	width: 70%;
+}
+
+.cart-total {
+	color: var(--white);
+	font-family: var(--hFont);
+	font-size: 1.5rem;
+	margin: 0.5rem auto; 
+	width: 70%;
+}
+
+.checkout {
+	background-color: var(--accent);
+	border: 2px solid transparent;
+	border-radius: 5px;
+	color: var(--primary);
+	cursor: pointer;
+	display: block;
+	font-family: var(--hFont);
+	font-size: 0.8rem;
+	font-weight: bold;
+	letter-spacing: 1px;
+	margin: 1rem auto;
+	padding: 1rem 1rem;
+	transition: 0.2s ease-in-out;
+}
+.checkout:hover {
+	color: var(--white);
+	transform: scale(1.05);
+}
+
+/*=============================================
+=            Breakpoints            =
+=============================================*/
+
+@media only screen and (max-width: 768px) {
+	.product-details-container {
+		flex-direction: column
+	}
+	.product-details-container .img-wrapper {
+		flex-direction: row;
+	}
+	.product-details-container .img-wrapper div {
+		padding: 1rem;
+	}
+}
+
+@media only screen and (min-width: 601px) {
+	.search-form.mobile {
+		display: none;
+	}
+}
+@media only screen and  (max-width: 600px)   {
+	.search-form.nav {
+		display: none;
+	}
+	.product-card:hover {
+		transform: scale(1);;
+	}
+	.category-selection {
+		justify-content: center;;
+	}
+	.item-container {
+		width: fit-content;
+	}
+	.cart-item {
+		align-items: center;
+		flex-direction: column;
+		height: fit-content;
+		width: 250px;
+	}
+	.ci-img-wrapper {
+		margin-top: 14px;
+	}
+	
+	.product-details-container {
+		align-items: center;
+	}
+	
+	.product-details-container .img-wrapper {
+		flex-direction: column;
+	}
+	.product-details-container .img-wrapper img {
+		width: clamp(275px, 70vw, 500px);
+	}
+}
+/*=====  End of Breakpoints  ======*/
