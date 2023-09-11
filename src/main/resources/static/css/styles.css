@@ -11,7 +11,7 @@
 	--white: #f8fded;
 	
 	--success: #2cb67d;
-	--danger: #e32b2b;
+	--danger: #ff3131;
 	--auth: #2c65b6;
 	--outline: #010101;
 	
@@ -239,7 +239,7 @@ h2.section-heading {
 	width: 80%;
 }
 .input-group input, .input-group textarea {
-	background-color: var(--bgDark);
+	background-color: var(--secondary);
 	border: none;
 	border-bottom: 4px solid var(--bgLight);
 	border-radius: 2px;
@@ -266,6 +266,23 @@ input:-webkit-autofill:active{
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	color: var(--primary);
 	transform: scale(1.05);
+}
+
+.otp-container {
+	gap: 0.5rem;
+}
+.otp-container .OTP {
+	background-color: var(--secondary);
+	height: 32px;
+	width: 12px;
+	text-align: center;
+}
+
+.OTP.correct {
+	border-bottom: 4px solid var(--success) !important;
+}
+.OTP.error {
+	border-bottom: 4px solid var(--danger) !important;
 }
 
 /* Submit button */
@@ -435,8 +452,11 @@ input:-webkit-autofill:active{
 	text-transform: capitalize;
 }
 
-.pub-link.alt {
+.pub-link.danger {
 	background-color: var(--danger);
+}
+.pub-link.success {
+	background-color: var(--success);
 }
 
 .pub-date {
@@ -804,6 +824,66 @@ footer {
 .content-row:nth-child(even) {
 	flex-direction: row-reverse;
 	padding-right: 15%;
+}
+
+/* ----- Error Popup ----- */
+.error-popup {
+	background-color: var(--danger);
+	border-radius: 10px;
+	color: var(--white);
+	gap: 1rem;
+	left: 50%;
+	padding: 1rem;
+	position: fixed;
+	top: 200px;
+    transform: translate(-50%, 0);
+}
+
+.error-popup span {
+	font-size: 2.5rem;
+}
+
+.error-popup p {
+	font-size: 1rem;
+}
+
+.error-popup button {
+	background-color: var(--white);
+	border: none;
+	border-radius: 50%;
+	color: var(--danger);
+	cursor: pointer;
+	padding: 5px 5px;
+}
+
+/* ----- Success Popup ----- */
+.success-popup {
+	background-color: var(--success);
+	border-radius: 10px;
+	color: var(--white);
+	gap: 1rem;
+	left: 50%;
+	padding: 1rem;
+	position: fixed;
+	top: 200px;
+    transform: translate(-50%, 0);
+}
+
+.success-popup span {
+	font-size: 2.5rem;
+}
+
+.success-popup p {
+	font-size: 1rem;
+}
+
+.success-popup button {
+	background-color: var(--white);
+	border: none;
+	border-radius: 50%;
+	color: var(--success);
+	cursor: pointer;
+	padding: 5px 5px;
 }
 
 /* ----- Pubic Pages ----- */

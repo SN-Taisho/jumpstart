@@ -7,6 +7,15 @@
 <main class="align-center"
 	style="min-height: 95vh;">
 	<div class="width-limiter">
+	
+		<jsp:include page="../Components/error-popup.jsp">
+			<jsp:param value="" name="ErrorMsg"/>
+		</jsp:include>
+		
+		<%-- <jsp:include page="../Components/success-popup.jsp">
+			<jsp:param value="Success" name="SuccessMsg"/>
+		</jsp:include> --%>
+	
 		<div class="tb-container align-center justify-between">
 			<div class="tb-image disappear">
 				<img alt="Registration Graphic" src="graphics/registration.svg">
@@ -49,5 +58,5 @@
 		</div>
 	</div>
 </main>
-
+<script src="js/validation.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>
