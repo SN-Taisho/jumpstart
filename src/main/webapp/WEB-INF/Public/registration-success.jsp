@@ -4,9 +4,11 @@
 	<jsp:param value="Thank You" name="HTMLtitle" />
 </jsp:include>
 
+<div class="page-divider"></div>
+
 <main class="public justify-center">
 
-	<div class="width-limiter">
+	<div class="width-limiter" style="margin-top: 2rem;">
 		<div class="pub-card">
 			<img src="graphics/registration-success.svg" alt="svg">
 			<h3 class="pub-heading confirmation">Registration Success</h3>

@@ -4,6 +4,8 @@
 	<jsp:param value="Contact Us" name="HTMLtitle" />
 </jsp:include>
 
+<div class="page-divider"></div>
+
 <main>
 
 	<div class="width-limiter justify-center" style="margin-top: 3rem;">

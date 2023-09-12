@@ -139,6 +139,29 @@ main {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
 }
+
+.separator {
+  align-items: center;
+  display: flex;
+  color: var(--accent);
+  text-align: center;
+  margin: -1rem 0rem;
+  width: 75%;
+  
+}
+.separator::before,
+.separator::after {
+  border-bottom: 2px solid var(--bgMedium);
+  content: '';
+  flex: 1;
+}
+.separator:not(:empty)::before {
+  margin-right: .5rem;
+}
+.separator:not(:empty)::after {
+  margin-left: .5rem;
+}
+
 .text-center {
 	text-align: center;
 }
@@ -421,14 +444,14 @@ input:-webkit-autofill:active{
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	padding: 3rem 2rem;
-	max-width: 900px;
 	height: fit-content;
 	margin: 1rem 2rem 3rem;
+	max-width: 900px;
+	padding: 3rem 2rem;
 }
 .pub-card img {
 	margin-bottom: 1.5rem;
-	max-height: 350px;
+	max-height: 300px;
 	width: 80%;
 }
 
@@ -848,12 +871,16 @@ footer {
 }
 
 .error-popup button {
-	background-color: var(--white);
-	border: none;
+	background-color: transparent;
+	border: 2px solid var(--white);
 	border-radius: 50%;
-	color: var(--danger);
+	color: var(--white);
 	cursor: pointer;
-	padding: 5px 5px;
+	padding: 0px 7px;
+}
+.error-popup button:hover {
+	background-color: var(--white);
+	color: var(--danger);
 }
 
 /* ----- Success Popup ----- */

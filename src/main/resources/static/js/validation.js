@@ -27,48 +27,65 @@ var emailRegex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-]+)(\.[a-zA-Z]{2,5}){1,2}$/
 
 
 /*----------  ON SUBMIT VALIDATION  ----------*/
+//SHOW ERROR MESSAGE
+let errorMessage = "";
+function showErrorPopup() {
+    errorText.innerText = errorMessage;
+    $(".error-popup").css("visibility", "visible");
+    $(".error-popup").fadeIn("fast");
+    setTimeout(function () {
+        $(".error-popup").fadeOut("fast");
+    }, 7000);
+}
 
 // VALIDATE REGISTRATION FORM ON SUBMIT
 function validateRegistration(event) {
-    // STOP FORM FROM BEING SUBMITTED
+	
+	// STOP FORM FROM BEING SUBMITTED
     event.preventDefault();
 
     // FULLNAME
     if (fullname.value.length < 3) {
         fullname.style.borderColor = error;
-        errorText.innerText = "You name cannot be shorter than 3 characters";
+        errorMessage = "You name cannot be shorter than 3 characters";
+        showErrorPopup();
         fullname.focus();
         return false;
     } else if (numberRegex.test(fullname.value)) {
         fullname.style.borderColor = error;
-        errorText.innerText = "Your name cannot contain a number";
+        errorMessage = "Your name cannot contain a number";
+        showErrorPopup();
         fullname.focus();
         return false;
     }
     // USERNAME
     else if (username.value.length < 3) {
         username.style.borderColor = error;
-        errorText.innerText = "Usernmae cannot be shorter than 3 characters";
+        errorMessage = "Usernmae cannot be shorter than 3 characters";
+        showErrorPopup();
         username.focus();
         return false;
     }
     // EMAIL
     else if (!emailRegex.test(email.value)) {
         email.style.borderColor = error;
-        errorText.innerText = "Please enter a valid email address";
+        errorMessage = "Please enter a valid email address";
+        showErrorPopup();
         email.focus();
         return false;
     } 
     // PASSWORD
     else if (password.value.length < 5) {
         password.style.borderColor = error;
-        errorText.innerText = "Please enter a password longer than 5 characters";
+        errorMessage = "Please enter a password longer than 5 characters";
+        showErrorPopup();
         password.focus();
         return false;
     }
     else if (!numberRegex.test(password.value)) {
         password.style.borderColor = error;
-        errorText.innerText = "Please enter a password containing at least one number";
+        errorMessage = "Please enter a password containing at least one number";
+        showErrorPopup();
         password.focus();
         return false;
     }

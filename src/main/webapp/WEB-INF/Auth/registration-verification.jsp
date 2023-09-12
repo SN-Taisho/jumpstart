@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+
 <jsp:include page="../Components/header.jsp">
 	<jsp:param value="Registration Confirmation" name="HTMLtitle" />
 </jsp:include>
@@ -16,7 +20,7 @@
 					OTP<br>Verification Code
 				</h3>
 				<span id="error-text" class="form-error"></span>
-				<form id="otpForm" class="form-card" autocomplete="on"
+				<sf:form id="otpForm" class="form-card" autocomplete="on"
 					onsubmit="validateOTPForm(event)" method="post"
 					action="verify_registration">
 
@@ -47,7 +51,7 @@
 
 					<button class="submit-button" style="margin-bottom: 1rem;">Verify</button>
 
-				</form>
+				</sf:form>
 			</section>
 		</div>
 	</div>

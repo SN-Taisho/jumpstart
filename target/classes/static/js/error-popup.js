@@ -1,5 +1,5 @@
 // Error Popup
-if ($('.error-text').is(':empty')) {
+if ($('#error-text').is(':empty')) {
 	// ERROR TEXT HIDDEN BY DEFAULT
 	$('.error-popup').css('visibility', 'hidden');
 } else {

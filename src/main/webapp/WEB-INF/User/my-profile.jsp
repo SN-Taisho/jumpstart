@@ -78,12 +78,8 @@
 		type="email" required="true" placeholder="(XX)-(your phone number)"
 		autocomplete="off" onkeyup="validateMobile()" name="" path=""
 		maxlength="255" />
-	</label> <label class="input-group flex-col">Password <input
-		id="password" type="password" required="true"
-		placeholder="e.g. JohnDoe1" autocomplete="off"
-		onkeyup="validatePassword()" name="" path="" maxlength="14" />
-	</label>
-
+	</label> 
+	
 	<button class="submit-button btnAnimation"
 		style="background-color: var(- -success);" type="submit">Save</button>
 </form>
