@@ -96,7 +96,16 @@ const nextInput = e.target.nextElementSibling
 })
 
 /*----------  OTP Form Validations ----------*/
-
+let errorMessage = "";
+function showErrorPopup() {
+    errorText.innerText = errorMessage;
+    $(".error-popup").css("visibility", "visible");
+    $(".error-popup").fadeIn("fast");
+    setTimeout(function () {
+        $(".error-popup").fadeOut("fast");
+    }, 7000);
+}
+	
 function validateOTPForm(event) {
 
 	event.preventDefault();
@@ -120,11 +129,13 @@ function validateOTPForm(event) {
 	const otpCode = digits.join('');
 
 	if (otpCode.length < 6) {
-		errorText.innerText = "Please enter the full 6 digit code";
+		errorMessage = "Please enter the full 6 digit code";
+		showErrorPopup();
 		return false;
 		
 	} else if (isNaN(otpCode)) {
-		errorText.innerText = "Please only enter numerical digits";
+		errorMessage = "Please only enter numerical digits";
+		showErrorPopup();
 		return false;
 		
 	} else {

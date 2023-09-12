@@ -3,7 +3,7 @@
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 
 <jsp:include page="../Components/header.jsp">
-	<jsp:param value="Registration Confirmation" name="HTMLtitle" />
+	<jsp:param value="Identity Verification" name="HTMLtitle" />
 </jsp:include>
 
 <div class="page-divider"></div>
@@ -31,13 +31,13 @@
 				</h3>
 				<sf:form id="otpForm" class="form-card" autocomplete="on"
 					onsubmit="validateOTPForm(event)" method="post"
-					action="verify_registration">
+					action="verify_identity">
 
 					<label class="input-group flex-col text-align-center">
 						Please enter the verification code sent to your email below <input
-						type="hidden" autocomplete="off" name="username"
-						value="${username}"> <input id="fullOTP" type="hidden"
-						maxlength="6" autocomplete="off" name="OTP">
+						type="hidden" autocomplete="off" name="email" value="${email}">
+						<input id="fullOTP" type="hidden" maxlength="6" autocomplete="off"
+						name="OTP">
 
 						<div class="otp-container justify-center"
 							style="margin: 0.5rem 0rem;">
@@ -58,7 +58,8 @@
 						</div>
 					</label>
 
-					<button class="submit-button" style="margin-bottom: 1rem;">Verify</button>
+					<button type="submit" class="submit-button"
+						style="margin-bottom: 1rem;">Verify</button>
 
 				</sf:form>
 			</section>

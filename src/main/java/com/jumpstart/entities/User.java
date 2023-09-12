@@ -38,7 +38,7 @@ public class User {
 //	Contact Details
 	private String email;
 	private String mobile;
-
+	private String address;
 	
 //  CONSTRUCTORS
     public User() {
@@ -67,7 +67,7 @@ public class User {
 	}
 
 	public User(Long id, String fullname, String username, String password, String oTP, Boolean activated,
-			Set<com.jumpstart.entities.Role> roles, String email, String mobile) {
+			Set<com.jumpstart.entities.Role> roles, String email, String mobile, String address) {
 		super();
 		this.id = id;
 		this.fullname = fullname;
@@ -78,6 +78,7 @@ public class User {
 		this.roles = roles;
 		this.email = email;
 		this.mobile = mobile;
+		this.address = address;
 	}
 
 	
@@ -152,6 +153,14 @@ public class User {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

@@ -136,7 +136,7 @@ public class AuthController {
 //				System.out.println("Logged in successfully as " + userRole);
 //				String success_msg = "Logged in successfully. Click here to go to dashboard.";
 //				redir.addFlashAttribute("success_msg", success_msg);
-				return "redirect:homepage";
+				return "redirect:dashboard";
 			}
 		}
 		
@@ -208,21 +208,23 @@ public class AuthController {
 	public String passwordResetOTPPage(@Param("email") String email, Model model) {
 		User user = userService.findEmail(email);
 		model.addAttribute("email", user.getEmail());
-		return "Auth/password-email";
+		return "Auth/identity-verification";
 	}
 	
-	@PostMapping("/verify_identity")
+	@PostMapping("verify_identity")
 	public String verifyIdentity(@RequestParam String OTP, @RequestParam String email, RedirectAttributes redir) {
 		User user = userService.findEmail(email);
     	
     	if(user.getOTP().equals(OTP)) {
     		redir.addFlashAttribute("email", user.getEmail());
         	return "redirect:reset-password";
-    	} else if (!(OTP.length() == 6)) {
+    	} 
+    	else if (!(OTP.length() == 6)) {
 			String errorMsg = "Code must be atleast 6 digits.";
 			redir.addFlashAttribute("errorMsg", errorMsg);
         	return "redirect:verify-identity?email=" + user.getEmail();
-    	} else {
+    	} 
+    	else {
 			String errorMsg = "Incorrect code.";
 			redir.addFlashAttribute("errorMsg", errorMsg);
         	return "redirect:verify-identity?email=" + user.getEmail();
@@ -246,7 +248,7 @@ public class AuthController {
 	
 	@GetMapping("/password-changed")
 	public String paswordChanged() {
-		return "Auth/password-success";
+		return "Public/password-changed";
 	}
 	
 //	-------------
@@ -256,42 +258,4 @@ public class AuthController {
 	public String accessDeniedPage() {
 		return "Public/access-denied";
 	}
-	
-//	-------
-//	PROFILE
-//	-------
-//	@GetMapping("/my-profile")
-//	public String viewProfile(Principal principal, Model model) {
-//		
-//		if (principal.getName().equals(null)) {
-//			return "redirect:access-denied";
-//		}
-//		
-//		String username = principal.getName();
-//		User userdata = userService.findLoginUser(username);
-//
-//		List<User> user = new ArrayList<User>();
-//		user.add(userdata);
-//		model.addAttribute("user", user);
-//		
-//
-//		return "User/profile";
-//	}
-
-//	-----------------------
-//	UPDATE PERSONAL PROFILE
-//	-----------------------
-//	@PostMapping("update_profile")
-//	public String updateProfileInfo(Principal principal, @ModelAttribute("user") User u, RedirectAttributes redir) {
-//		
-//		String username = principal.getName();
-//		
-//		User user = userService.findLoginUser(username);
-//		
-//		user.setFullname(u.getFullname());
-//		
-//		userService.update(user);
-//		
-//		return "redirect:my-profile";
-//	}
 }

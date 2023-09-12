@@ -18,7 +18,7 @@
 				<button class="btnAnimation icon material-icons"
 					onclick="closeFormError()">close</button>
 			</div>
-			<p id="error-text" class="pFont text-center"></p>
+			<p id="error-text" class="pFont text-center">${errorMsg }</p>
 		</div>
 
 		<div class="tb-container align-center justify-between">

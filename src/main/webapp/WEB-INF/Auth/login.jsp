@@ -10,6 +10,16 @@
 
 <main class="align-center" style="min-height: 95vh;">
 	<div class="width-limiter">
+
+		<div class="justify-center flex-col error-popup">
+			<div class="justify-between">
+				<span class="material-icons">error</span>
+				<button class="btnAnimation icon material-icons"
+					onclick="closeFormError()">close</button>
+			</div>
+			<p id="error-text" class="pFont text-center">${errorMsg }</p>
+		</div>
+
 		<div class="tb-container align-center justify-between">
 			<div class="tb-image disappear">
 				<img alt="Registration Graphic" src="graphics/login.svg">
@@ -47,5 +57,5 @@
 		</div>
 	</div>
 </main>
-
+<script src="js/error-popup.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>
