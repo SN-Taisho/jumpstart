@@ -186,8 +186,6 @@ h2.section-heading {
 	margin: 1rem auto;
 }
 
-
-
 .tb-container {
 	align-items: center;
 	display: flex;
@@ -219,10 +217,6 @@ h2.section-heading {
 	display: block;
 	margin: auto;
 	width: 90%;
-}
-
-.single-container {
-	
 }
 
 /* ----- Form Utility Classes ----- */
@@ -258,7 +252,6 @@ h2.section-heading {
 .input-group {
 	color: var(--white);
 	font-family: var(--hFont);
-	margin: auto;
 	width: 80%;
 }
 .input-group input, .input-group textarea {
@@ -272,7 +265,7 @@ h2.section-heading {
 	font-family: var(--pFont);
 	font-size: 1rem;
 	line-height: 1.5rem;
-	margin-top: var(--tiny);
+	margin-top: 0.5rem;
 	padding: 0.3rem 1rem;
 	resize: none;
 	transition: ease-in-out 0.3s;
@@ -290,6 +283,47 @@ input:-webkit-autofill:active{
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	color: var(--primary);
 	transform: scale(1.05);
+}
+
+/* DROPDOWN SELECTION */
+select.input-select {
+    background-color: var(--bgDark);
+    border-radius: 3px;
+    border: 2px solid var(--white);
+    color: var(--white);
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0.5em 1rem;
+    transition: 0.3s ease-out;
+    width: fit-content;
+}
+select.input-select:focus {
+	background-color: var(--bgLight);
+    border: 2px solid var(--accent);
+    color: var(--primary);
+}
+.select-label {
+	color: var(--white);
+	margin-right: 5px;
+}
+
+/* FILE UPLOAD */
+#photo  {
+	background-color: var(--secondary);
+	border-radius: 4px;
+	color: var(--paragraph);
+	cursor: pointer;
+	display: inline-block;
+	max-width: 300px;
+	padding: 6px 12px;
+}
+.image-preview {
+	width: clamp(250px, 90%, 650px);
+}
+.image-preview img {
+	border-radius: 5px;
+	object-fit: cover;
+	width: 100%;
 }
 
 .otp-container {
@@ -400,10 +434,10 @@ input:-webkit-autofill:active{
 	margin-top: 1.5rem;
 }
 
-.modal .submit-button {
-	margin-top: 1.5rem;
+.submit-button.save {
+	background-color: var(--success);
 }
-.modal .submit-button:hover {
+.submit-button.save:hover {
 	box-shadow: 0px 15px 20px #2cb67d40;
 }
 

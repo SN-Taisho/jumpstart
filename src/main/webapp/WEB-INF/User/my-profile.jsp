@@ -25,8 +25,13 @@
 			<div class="img-wrapper">
 				<img alt="Product" src="assets/Profile.png">
 				<div>
-					<button id="openEditProfile" class="edit-profile-btn btnAnimation">
+					<button id="openEditProfile" class="edit-btn btnAnimation" style="margin-bottom: 2rem;">
 						Edit Profile</button>
+					<form class="justify-center" action="logout" method="post">
+						<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" /> <input type="submit" name="Logout"
+							value="Logout" class="logout-btn"/>
+					</form>
 				</div>
 			</div>
 			<div class="profile-details">
@@ -102,8 +107,8 @@
 			path="address">${address }</textarea>
 	</label>
 
-	<button class="submit-button btnAnimation"
-		style="background-color: var(--success);" type="submit">Save</button>
+	<button class="submit-button save btnAnimation" type="submit" style="margin: 0rem auto;">Save</button>
+		
 </sf:form>
 <button id="closeEditProfile" class="material-icons modal-close">close</button>
 </dialog>

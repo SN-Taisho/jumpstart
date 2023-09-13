@@ -40,7 +40,8 @@ public class User {
 	private String mobile;
 	private String address;
 	
-//  CONSTRUCTORS
+	
+//  Constructors
     public User() {
 
     }
@@ -67,7 +68,7 @@ public class User {
 	}
 
 	public User(Long id, String fullname, String username, String password, String oTP, Boolean activated,
-			Set<com.jumpstart.entities.Role> roles, String email, String mobile, String address) {
+			Set<Role> roles, String email, String mobile, String address) {
 		super();
 		this.id = id;
 		this.fullname = fullname;
@@ -82,7 +83,7 @@ public class User {
 	}
 
 	
-//	GETTER SETTERS
+//	Getter Setters
 	public Long getId() {
 		return id;
 	}
@@ -164,7 +165,7 @@ public class User {
 	}
 	
 	
-//	EQUALS AND HASH
+// Equals and Hash
 	@Override
 	public boolean equals(Object o) {
 	    if (this == o) return true;
@@ -180,7 +181,7 @@ public class User {
 	}
 	
 	
-//	TO STRING
+//	To String
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", fullname=" + fullname + ", username=" + username + ", password=" + password

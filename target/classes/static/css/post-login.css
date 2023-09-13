@@ -88,7 +88,7 @@
 	margin-bottom: 1rem;
 }
 
-.edit-profile-btn {
+.edit-btn {
 	align-items: center;
 	background-color: var(--auth);
 	border: none;
@@ -107,7 +107,7 @@
 	width: fit-content;
 	transition: 0.2s ease-out;
 }
-.edit-profile-btn:hover {
+.edit-btn:hover {
 	outline: 2px solid var(--auth);
 	outline-offset: 5px;
 }
@@ -181,7 +181,7 @@
 
 
 /*----------  Product Categories  ----------*/
-.category-selection {
+.selection-wrapper {
 	background-color: var(--bgMedium);
 	border-radius: 10px;
 	display: flex;
@@ -191,7 +191,7 @@
 	padding: 0.7rem 1rem;
 }
 
-.category-selection button {
+.selection-wrapper button {
 	background-color: transparent;
 	border: 2px solid transparent;
 	border-radius: 5px;
@@ -204,17 +204,17 @@
 	padding: 1rem 1rem;
 	transition: 0.2s ease-in-out;
 }
-.category-selection button:hover {
+.selection-wrapper button:hover {
 	background-color: transparent;
 	border: 2px solid var(--accent);
 	color: var(--accent);
 }
-.category-selection button.default {
+.selection-wrapper button.default {
 	background-color: var(--accent);
 	color: var(--white);
 	
 }
-.category-selection button.default:hover {
+.selection-wrapper button.default:hover {
 	background-color: transparent;
 	border: 2px solid var(--accent);
 	color: var(--accent);
@@ -289,6 +289,30 @@
 }
 .add-to-cart:hover {
 	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+
+.edit-product {
+	align-items: center;
+	background-color: var(--auth);
+	border: none;
+	border-radius: 5px;
+	color: var(--white);
+	cursor: pointer;
+	display: flex;
+	font-family: var(--pFont);
+	font-size: 1rem;
+	font-weight: bold;
+	justify-content: space-between;
+	margin: 10px 15px 15px auto;
+	outline: 2px solid transparent;
+	outline-offset: -2px;
+	padding: 7px 10px;
+	width: 130px;
+	transition: 0.2s ease-out;
+}
+.edit-product:hover {
+	outline: 2px solid var(--auth);
 	outline-offset: 3px;
 }
 
@@ -477,6 +501,11 @@
 	transform: scale(1.05);
 }
 
+
+/*----------  Product Management  ----------*/
+
+
+
 /*=============================================
 =            Breakpoints            =
 =============================================*/
@@ -505,7 +534,7 @@
 	.product-card:hover {
 		transform: scale(1);;
 	}
-	.category-selection {
+	.selection-wrapper {
 		justify-content: center;;
 	}
 	.item-container {

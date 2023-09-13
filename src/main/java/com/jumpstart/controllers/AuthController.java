@@ -69,6 +69,7 @@ public class AuthController {
 				body += "<p>Jumpstart</p>";
 
 				emailService.sendEmail(toEmail, subject, body);
+				System.out.println("Verification code for user " + user.getUsername() + ": " + code);
 				return "redirect:verify-registration?username=" + user.getUsername();
 			}
 
@@ -133,10 +134,18 @@ public class AuthController {
 		
 		for (String roleName : roleNames) {
 			if (roleName == userRole) {
-//				System.out.println("Logged in successfully as " + userRole);
-//				String success_msg = "Logged in successfully. Click here to go to dashboard.";
-//				redir.addFlashAttribute("success_msg", success_msg);
-				return "redirect:dashboard";
+
+				if (userRole.equals("Admin")) {
+					System.out.println("Logged as an Admin");
+				}
+				if (userRole.equals("Staff")) {
+					System.out.println("Logged as a Staff Member");
+					return "redirect:product-management";
+				}
+				if (userRole.equals("User")) {
+					System.out.println("Logged as a User");
+					return "redirect:dashboard";
+				}
 			}
 		}
 		

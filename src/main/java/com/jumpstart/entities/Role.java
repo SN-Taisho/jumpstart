@@ -27,7 +27,7 @@ public class Role {
     }
 
     
-//    GETTER SETTERS
+//  Getter Setters
     public Role(String name) {
         this.name = name;
     }
