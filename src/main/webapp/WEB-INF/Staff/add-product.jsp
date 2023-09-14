@@ -27,16 +27,16 @@
 
 				<label class="input-group flex-col">Product Name <sf:input
 					type="text" required="true" placeholder="Name of the product"
-					autocomplete="off" name="name" path="name" />
+					autocomplete="off" name="name" path="name"/>
 				</label>
 
 				<label class="input-group flex-col">Product Description <textarea
 						required placeholder="Write someothing about the product" rows="5"
-						name="description" path="description"></textarea>
+						name="description"></textarea>
 				</label>
 
 				<div class="input-group flex-wrap" style="gap: 1rem;">
-					<label class="select-label">Category<select class="input-select" name="category" style="margin-left: 5px;">
+					<label class="select-label">Category<select class="input-select" name="categoryString" style="margin-left: 5px;" required>
 							<option value="" selected disabled hidden="true">Choose here</option>
 							<c:forEach items="${categories }" var="category">
 								<option value="${category.name}">${category.name}</option>
@@ -61,7 +61,7 @@
 
 				<div class="input-group flex-col">
 					<label class="file-input">Upload a Picture (Preferrably 1:1)</label> <input
-						required="true" type="file" name="fileImage" id="photo"
+						required type="file" name="fileImage" id="photo"
 						accept="image/png, image/jpeg" />
 				</div>
 				<div class="image-preview">
@@ -85,8 +85,12 @@
             });
       	 	</script>
 
-				<button class="submit-button save btnAnimation" type="submit"
-					style="margin: 1rem auto;">Add Product</button>
+				<div class="justify-between flex-wrap" style="gap: 1rem;">
+					<button class="submit-button save btnAnimation" type="submit"
+						style="margin: 1rem auto;">Save Changes</button>
+					<button class="submit-button cancel btnAnimation" type="button"
+						onclick="window.history.back()" style="margin: 1rem auto;">Cancel</button>
+				</div>
 
 			</sf:form>
 		</section>

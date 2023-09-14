@@ -246,6 +246,7 @@
 .card-img-wrapper img {
 	cursor: pointer;
 	display: block;
+	min-height: 100%;
 	object-fit: cover;
 	transition: 0.3s ease-in-out;
 }
@@ -258,6 +259,9 @@
 	font-family: var(--hFont);
 	font-weight: bold;
 	margin: 10px 15px;
+	overflow: hidden; 
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .product-card .price {
@@ -266,6 +270,14 @@
 	font-size: 1.1rem;
 	font-weight: bold;
 	margin: 10px 15px;
+}
+
+.product-card .sales {
+	color: var(--accent);
+	font-family: var(--pFont);
+	font-size: 1rem;
+	letter-spacing: 1px;
+	margin: -12px 15px 10px;
 }
 
 .add-to-cart {
@@ -322,6 +334,7 @@
 	background-color: var(--bgDark);
 	border-radius: 5px;
 	display: flex;
+	flex-direction: column;
 	gap: 2rem;
 	min-height: 400px;
 	padding: 2rem;
@@ -330,13 +343,18 @@
 .img-wrapper {
 	border-radius: 10px;
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	width: fit-content;
 }
 
+.img-wrapper>div {
+	padding: 1rem;
+}
+
 .img-wrapper img {
-	aspect-ratio: 1/1;
+	object-fit: cover;
 	border-radius: 10px;
+	height: clamp(275px, 30vw, 400px);
 	width: clamp(275px, 30vw, 400px);
 }
 
@@ -352,6 +370,14 @@
 	font-family: var(--pFont);
 	font-size: 2rem;
 }
+
+.img-wrapper .sales {
+	color: var(--accent);
+	font-family: var(--pFont);
+	font-size: 1rem;
+	letter-spacing: 1px;
+}
+
 
 .product-details .name {
 	color: var(--white);
@@ -511,14 +537,8 @@
 =============================================*/
 
 @media only screen and (max-width: 768px) {
-	.product-details-container {
-		flex-direction: column
-	}
-	.product-details-container .img-wrapper {
-		flex-direction: row;
-	}
 	.product-details-container .img-wrapper div {
-		padding: 1rem;
+		
 	}
 }
 

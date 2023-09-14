@@ -10,7 +10,7 @@
 				<div id="banner-text" class="pFont text-center">
 					<h1>Jumpstart</h1>
 					<p>Made by Enthusiasts, For Enthusiasts</p>
-					<button id="banner-button" class="align-center justify-between">
+					<button id="banner-button" class="align-center justify-between" onclick="window.location.href='signup'">
 						Shop Now<i class="material-icons">shopping_cart</i>
 					</button>
 				</div>

@@ -11,7 +11,9 @@
 	--white: #f8fded;
 	
 	--success: #2cb67d;
+	--successTrans: #2cb67d40;
 	--danger: #ff3131;
+	--dangerTrans: #ff313140;
 	--auth: #2c65b6;
 	--outline: #010101;
 	
@@ -438,7 +440,14 @@ select.input-select:focus {
 	background-color: var(--success);
 }
 .submit-button.save:hover {
-	box-shadow: 0px 15px 20px #2cb67d40;
+	box-shadow: 0px 15px 20px var(--successTrans);
+}
+
+.submit-button.cancel {
+	background-color: var(--danger);
+}
+.submit-button.cancel:hover {
+	box-shadow: 0px 15px 20px var(--dangerTrans);
 }
 
 /* ----- Public Pages Utility Classes ----- */

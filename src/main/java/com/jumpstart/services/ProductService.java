@@ -1,6 +1,5 @@
 package com.jumpstart.services;
 
-import java.util.HashSet;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -25,9 +24,8 @@ public class ProductService {
 //	-------------
 //	Add a Product
 //	-------------
-	public Product saveProduct(Product product, String category) {
+	public Product save(Product product) {
 		
-		product.setCategories(new HashSet<>(categoryRepo.findBySpecificCateogry(category)));
 		return productRepo.save(product);
 	}
 	
@@ -36,5 +34,9 @@ public class ProductService {
 //	---------------
 	public List<Product> getAllProducts() {
 		return productRepo.findAll();
+	}
+	
+	public Product findProduct(Long pId) {
+		return productRepo.getById(pId);
 	}
 }

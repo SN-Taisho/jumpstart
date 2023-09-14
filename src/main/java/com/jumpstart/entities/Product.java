@@ -1,16 +1,13 @@
 package com.jumpstart.entities;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Product {
@@ -32,13 +29,9 @@ public class Product {
 	@Column(nullable = true, length = 64)
 	private String photoImagePath;
 
-	@ManyToMany
-	@JoinTable(	name = "product_category", 
-				joinColumns = @JoinColumn(name = "product_id"),
-				inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private Set<Category> categories = new HashSet<>();
-
-
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "category_id")
+	private Category category;
 	
 	
 //	Constructors
@@ -46,8 +39,8 @@ public class Product {
 		
 	}
 	
-public Product(Long id, String name, String description, String price, int sales, int stock, String photos,
-			String photoImagePath, Set<Category> categories) {
+	public Product(Long id, String name, String description, String price, int sales, int stock, String photos,
+			String photoImagePath, Category category) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -57,7 +50,7 @@ public Product(Long id, String name, String description, String price, int sales
 		this.stock = stock;
 		this.photos = photos;
 		this.photoImagePath = photoImagePath;
-		this.categories = categories;
+		this.category = category;
 	}
 
 
@@ -126,20 +119,11 @@ public Product(Long id, String name, String description, String price, int sales
 		this.photoImagePath = photoImagePath;
 	}
 	
-	public Set<Category> getCategories() {
-		return categories;
+	public Category getCategory() {
+		return category;
 	}
 
-	public void setCategories(Set<Category> categories) {
-		this.categories = categories;
-	}
-
-	
-//	To String
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", description=" + description + ", price=" + price + ", sales="
-				+ sales + ", stock=" + stock + ", photos=" + photos + ", photoImagePath=" + photoImagePath
-				+ ", categories=" + categories + "]";
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 }

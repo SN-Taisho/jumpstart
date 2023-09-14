@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.jumpstart.entities.Category;
+import com.jumpstart.entities.Product;
 import com.jumpstart.entities.User;
+import com.jumpstart.services.CategoryService;
+import com.jumpstart.services.ProductService;
 import com.jumpstart.services.UserService;
 
 
@@ -21,9 +25,22 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	CategoryService categoryService;
+	
+	@Autowired
+	ProductService productService;
 
 	@GetMapping("/dashboard")
-	public String dashboard() {
+	public String dashboard(Model model) {
+		
+		List<Category> categories = categoryService.getAllCategories();
+		model.addAttribute("categories", categories);
+		
+		List<Product> products = productService.getAllProducts();
+		model.addAttribute("products", products);
+		
 		return "User/dashboard";
 	}
 	

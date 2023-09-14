@@ -23,6 +23,10 @@ public class CategoryService {
 	public Category save(Category category) {
 		return categoryRepo.save(category);
 	}
+	
+	public Category findByName(String category) {
+		return categoryRepo.findByName(category);
+	}
 
 //	----------------
 //	Category Display

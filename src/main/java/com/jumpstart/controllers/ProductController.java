@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,14 @@ public class ProductController {
 //	Product's Display
 //	-----------------
 	@GetMapping("/product-details")
-	public String productDetailsPage() {
+	public String productDetailsPage(Model model, @RequestParam("pId") Long pId) {
+		
+		Product productDetails = productService.findProduct(pId);
+		List<Product> product = new ArrayList<Product>();
+		product.add(productDetails);
+		
+		model.addAttribute("product", product);
+		
 		return "Products/product-details";
 	}
 	
@@ -73,20 +81,21 @@ public class ProductController {
 	}
 	
 	@PostMapping("/add_product")
-	public String addProduct(@ModelAttribute("product") Product product, @RequestParam("category") String category, 
+	public String addProduct(@ModelAttribute("product") Product product, @RequestParam("categoryString") String categoryString, 
 			@RequestParam("fileImage") MultipartFile multipartFile, RedirectAttributes redir) throws IOException {
 		
 		product.setSales(0);
-		System.out.println(product.getName());
-		System.out.println(product.getDescription());
-		System.out.println(category);
-		System.out.println(product.getStock());
-		System.out.println(product.getPrice());
+		Category assignedCategory = categoryService.findByName(categoryString);
+		product.setCategory(assignedCategory);
+		
+		String descText = product.getDescription();
+		String htmlFormatedText = descText.replace("\r\n", "<br />");
+		product.setDescription(htmlFormatedText);
 		
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		product.setPhotos(fileName);
 		
-		Product savedProduct = productService.saveProduct(product, category);
+		Product savedProduct = productService.save(product);
 		
 		String uploadDir = "./src/main/resources/static/product-images/" + savedProduct.getId();
 		Path uploadPath = Paths.get(uploadDir);
@@ -105,10 +114,57 @@ public class ProductController {
 		}
 		
 		product.setPhotoImagePath("/product-images/" + savedProduct.getId() + "/" + savedProduct.getPhotos());
-		productService.saveProduct(product, category);
+		productService.save(product);
 		
 		String successMsg = "Product Successfully Added";
 		redir.addFlashAttribute("successMsg", successMsg);
 		return "redirect:/product-management";
+	}
+	
+	@GetMapping("/edit-product")
+	public String editProductPage(Model model, @RequestParam("pId") Long pId) {
+		
+		List<Category> categories = categoryService.getAllCategories();
+		model.addAttribute("categories", categories);
+		
+		Product productDetails = productService.findProduct(pId);
+		
+		String htmlFormattedText = productDetails.getDescription();
+		String descText = htmlFormattedText.replace("<br />", "\r\n");
+		productDetails.setDescription(descText);
+		
+		List<Product> product = new ArrayList<Product>();
+		product.add(productDetails);
+		
+		model.addAttribute("product", product);
+		
+		return "Staff/edit-product";
+	}
+	
+	@PostMapping("/edit_product")
+	public String editProduce(@ModelAttribute("product") Product product, @RequestParam("categoryString") String categoryString, 
+			@RequestParam("pId") Long pId, RedirectAttributes redir) {
+		
+		Product thisProduct = productService.findProduct(pId);
+		
+		Category assignedCategory = categoryService.findByName(categoryString);
+		product.setCategory(assignedCategory);
+		
+		String descText = product.getDescription();
+		String htmlFormatedText = descText.replace("\r\n", "<br />");
+		product.setDescription(htmlFormatedText);
+		
+		thisProduct.setName(product.getName());
+		thisProduct.setDescription(product.getDescription());
+		thisProduct.setCategory(product.getCategory());
+		thisProduct.setPrice(product.getPrice());
+		thisProduct.setStock(product.getStock());
+		
+		productService.save(thisProduct);
+		
+		String successMsg = thisProduct.getName() + " has been successfully updated";
+		redir.addFlashAttribute("successMsg", successMsg);
+		
+		return "redirect:product-details?pId=" + pId;
 	}
 }

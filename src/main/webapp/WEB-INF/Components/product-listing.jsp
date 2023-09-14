@@ -14,23 +14,27 @@
 <section class="product-list">
 
 	<c:forEach items="${products }" var="p">
-		<div class="product-card">
+		<c:if test="${p.stock ne 0 }">
+			<div class="product-card">
 			<a class="card-img-wrapper"
 				href="/product-details?pId=${p.id}"> <img
 				alt="${p.photos }" src="${p.photoImagePath }" width="275">
 			</a>
 			<h3>${p.name }</h3>
 			<p class="price">&dollar;&nbsp;${p.price}</p>
+			<p class="sales">Items sold: ${p.sales }</p>
+			
 			<button class="add-to-cart">
 				Add to Cart<i class="material-icons">shopping_cart</i>
 			</button>
 
 			<sec:authorize access="hasAnyRole('Admin','Staff')">
-				<button class="edit-btn" style="margin: 0rem 1rem 1rem auto;">
+				<button class="edit-btn" style="margin: 0rem 1rem 1rem auto;" onclick="window.location.href='edit-product?pId=${p.id}'">
 					Edit Details<i class="material-icons">edit</i>
 				</button>
 			</sec:authorize>
 		</div>
+		</c:if>
 	</c:forEach>
 	
 </section>

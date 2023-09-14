@@ -1,15 +1,10 @@
 package com.jumpstart.entities;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 @Entity
 public class Category {
@@ -24,9 +19,6 @@ public class Category {
 	
 	@Column(name = "description")
 	private String description;
-	
-	@ManyToMany(mappedBy = "categories")
-	private Set<Product> products = new HashSet<>();
 	
 	public Category() {
 	}
@@ -55,26 +47,5 @@ public class Category {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Set<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(Set<Product> products) {
-		this.products = products;
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Category category = (Category) o;
-		return name.equals(category.name);
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(name);
 	}
 }

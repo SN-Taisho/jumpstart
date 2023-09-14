@@ -2,7 +2,8 @@
 	uri="http://www.springframework.org/security/tags"%>
 <footer class="">
 
-	<div class="width-limiter justify-center flex-col" style="padding: 1rem 2rem;">
+	<div class="width-limiter justify-center flex-col"
+		style="padding: 1rem 2rem;">
 		<div id="footer-top" class="hFont">
 			<a href="home" class="align-center text-deco-none"> <img
 				src="assets/Logo.svg" alt="Logo" width="75" />
@@ -19,12 +20,38 @@
 					<li><a href="/contact-us">Contact Us</a></li>
 				</ul>
 
-				<ul class="foot-links align-start flex-col list-style-none">
-					<h5 class="footer-subheader">Account</h5>
-					<li><a href="/signup">Sign Up</a></li>
-					<li><a href="/login">Log In</a></li>
+				<sec:authorize access="!isAuthenticated()">
+					<ul class="foot-links align-start flex-col list-style-none">
+						<h5 class="footer-subheader">Account</h5>
+						<li><a href="/login">Login</a></li>
+						<li><a href="/signup">Sign Up</a></li>
+					</ul>
+				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
+					
+					<sec:authorize access="hasRole('User')">
+					<ul class="foot-links align-start flex-col list-style-none">
+						<h5 class="footer-subheader">Jumpstart</h5>
+						<li><a href="/dashboard">Products</a></li>
+						<li><a href="/cart">My Cart</a></li>
+						<li><a href="/my-profile">My Profile</a></li>
+					</ul>
+					</sec:authorize>
+					
+					<sec:authorize access="hasRole('Staff')">
+					<ul class="foot-links align-start flex-col list-style-none">
+						<h5 class="footer-subheader">Products</h5>
+						<li><a href="/product-management">Manage</a></li>
+						<li><a href="/add-product">Add</a></li>
+						<li><a href="/in-store-pickups">Pickups</a></li>
+						<li><a href="/deliveries">Deliveries</a></li>
+					</ul>
+					</sec:authorize>
+					
+				</sec:authorize>
 
-				</ul>
+
 			</div>
 
 			<div id="footer-mid">
