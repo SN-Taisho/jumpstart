@@ -933,6 +933,7 @@ footer {
 	position: fixed;
 	top: 200px;
     transform: translate(-50%, 0);
+    z-index: 20;
 }
 
 .success-popup span {

@@ -136,15 +136,19 @@ public class AuthController {
 			if (roleName == userRole) {
 
 				if (userRole.equals("Admin")) {
-					System.out.println("Logged as an Admin");
+					String successMsg = "Logged as Administrator";
+					redir.addFlashAttribute("successMsg", successMsg);
+					return "redirect:products";
 				}
 				if (userRole.equals("Staff")) {
-					System.out.println("Logged as a Staff Member");
-					return "redirect:product-management";
+					String successMsg = "Logged as Staff Member";
+					redir.addFlashAttribute("successMsg", successMsg);
+					return "redirect:products";
 				}
 				if (userRole.equals("User")) {
-					System.out.println("Logged as a User");
-					return "redirect:dashboard";
+					String successMsg = "Welcome to Jumpstart!";
+					redir.addFlashAttribute("successMsg", successMsg);
+					return "redirect:products";
 				}
 			}
 		}

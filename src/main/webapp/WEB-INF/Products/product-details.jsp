@@ -46,7 +46,7 @@
 							Add to Cart<i class="material-icons">shopping_cart</i>
 						</button>
 						<sec:authorize access="hasAnyRole('Admin','Staff')">
-							<button class="edit-btn" onclick="window.location.href='/edit-product?pId=${id}'" style="margin: 0rem auto 0rem 0rem; padding: 0.7rem 1.25rem; width: 160px;">
+							<button class="action-btn edit" onclick="window.location.href='/edit-product?pId=${id}'" style="margin: 0rem auto 0rem 0rem; padding: 0.7rem 1.25rem; width: 160px;">
 								Edit Details<i class="material-icons">edit</i>
 							</button>
 						</sec:authorize>

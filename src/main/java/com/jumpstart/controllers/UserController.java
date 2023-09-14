@@ -32,18 +32,6 @@ public class UserController {
 	@Autowired
 	ProductService productService;
 
-	@GetMapping("/dashboard")
-	public String dashboard(Model model) {
-		
-		List<Category> categories = categoryService.getAllCategories();
-		model.addAttribute("categories", categories);
-		
-		List<Product> products = productService.getAllProducts();
-		model.addAttribute("products", products);
-		
-		return "User/dashboard";
-	}
-	
 	@GetMapping("/my-profile")
 	public String myProfilePage(Principal principal, Model model) {
 		

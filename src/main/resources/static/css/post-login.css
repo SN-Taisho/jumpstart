@@ -88,9 +88,8 @@
 	margin-bottom: 1rem;
 }
 
-.edit-btn {
+.action-btn {
 	align-items: center;
-	background-color: var(--auth);
 	border: none;
 	border-radius: 5px;
 	color: var(--white);
@@ -107,10 +106,24 @@
 	width: fit-content;
 	transition: 0.2s ease-out;
 }
-.edit-btn:hover {
+
+.action-btn.edit {
+	background-color: var(--auth);
+}
+.action-btn.edit:hover {
 	outline: 2px solid var(--auth);
 	outline-offset: 5px;
 }
+
+.action-btn.delete {
+	background-color: var(--danger);
+}
+.action-btn.delete:hover {
+	outline: 2px solid var(--danger);
+	outline-offset: 5px;
+}
+
+
 
 @media only screen and (max-width: 650px) {
 	.profile-container {

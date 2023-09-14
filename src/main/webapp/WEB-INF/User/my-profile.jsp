@@ -25,7 +25,7 @@
 			<div class="img-wrapper">
 				<img alt="Product" src="assets/Profile.png">
 				<div>
-					<button id="openEditProfile" class="edit-btn btnAnimation" style="margin-bottom: 2rem;">
+					<button id="openEditProfile" class="action-btn edit btnAnimation" style="margin-bottom: 2rem;">
 						Edit Profile</button>
 					<form class="justify-center" action="logout" method="post">
 						<input type="hidden" name="${_csrf.parameterName}"

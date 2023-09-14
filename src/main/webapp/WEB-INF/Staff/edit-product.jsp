@@ -23,7 +23,8 @@
 	<div class="width-limiter" style="padding: 0rem 2rem;">
 
 		<div class="selection-wrapper">
-			<button onclick="window.location.href='product-management'">Product-Management</button>
+			<button onclick="window.location.href='products'">Product Management</button>
+			<button onclick="window.location.href='categories'">Categories</button>
 			<button onclick="window.location.href='add-product'">Add a New Product</button>
 			<button>In-store Pickups</button>
 			<button>Delivery Orders</button>

@@ -29,9 +29,13 @@ public class CategoryService {
 	}
 
 //	----------------
-//	Category Display
+//	Category Management / Display
 //	----------------
 	public List<Category> getAllCategories() {
 		return categoryRepo.findAll();
+	}
+	
+	public Category getByCategoryId(Long cId) {
+		return categoryRepo.getById(cId);
 	}
 }

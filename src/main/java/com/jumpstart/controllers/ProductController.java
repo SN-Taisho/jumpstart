@@ -37,6 +37,28 @@ public class ProductController {
 //	-----------------
 //	Product's Display
 //	-----------------
+	@GetMapping("/products")
+	public String byCategory(@RequestParam(name = "category", required = false) String category, Model model) {
+		
+		List<Category> categories = categoryService.getAllCategories();
+		model.addAttribute("categories", categories);
+		
+		if (category != null) {
+			Category selectedCategory = categoryService.findByName(category);
+			
+			List<Product> filtedredProducts = productService.getProductsByCategory(selectedCategory);
+			model.addAttribute("products", filtedredProducts);
+			model.addAttribute("selectedCateg", selectedCategory.getName());
+			
+			return "Products/product-listing";
+		}
+		
+		List<Product> products = productService.getAllProducts();
+		model.addAttribute("products", products);
+		
+		return "Products/product-listing";
+	}
+	
 	@GetMapping("/product-details")
 	public String productDetailsPage(Model model, @RequestParam("pId") Long pId) {
 		
@@ -64,13 +86,9 @@ public class ProductController {
 		return "Staff/product-management";
 	}
 	
-	@PostMapping("create_category")
-	public String createCategory(@ModelAttribute Category category) {
-		
-		categoryService.save(category);
-		return "redirect:/add-product";
-	}
-	
+//	--------------
+//	Create Product
+//	--------------
 	@GetMapping("/add-product")
 	public String addProductPage(Model model, @ModelAttribute("product") Product product) {
 		
@@ -120,7 +138,10 @@ public class ProductController {
 		redir.addFlashAttribute("successMsg", successMsg);
 		return "redirect:/product-management";
 	}
-	
+
+//	------------
+//	Edit Product
+//	------------
 	@GetMapping("/edit-product")
 	public String editProductPage(Model model, @RequestParam("pId") Long pId) {
 		
@@ -166,5 +187,19 @@ public class ProductController {
 		redir.addFlashAttribute("successMsg", successMsg);
 		
 		return "redirect:product-details?pId=" + pId;
+	}
+	
+//	--------------
+//	Delete Product
+//	--------------
+	@GetMapping("/delete_product")
+	public String deleteProduct(@RequestParam Long pId, RedirectAttributes redir) {
+		
+		System.out.println(pId + "Don't forget to enable me (deletion)");
+		
+		String successMsg = "Category has been successfully deleted";
+		redir.addFlashAttribute("successMsg", successMsg);
+		
+		return "redirect:/products";
 	}
 }

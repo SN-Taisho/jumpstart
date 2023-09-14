@@ -37,21 +37,11 @@
 
 		<div class="width-limiter justify-between">
 
-			<sec:authorize access="hasAnyRole('Staff', 'Admin')">
 				<a id="navbarLeft" class="align-center text-deco-none"
-					href="/product-management"> <img src="assets/Logo.svg" alt="Logo"
+					href="/products"> <img src="assets/Logo.svg" alt="Logo"
 					width="100">
 					<h1 class="hFont">Jumpstart</h1>
 				</a>
-			</sec:authorize>
-
-			<sec:authorize access="hasRole('User')">
-				<a id="navbarLeft" class="align-center text-deco-none"
-					href="/dashboard"> <img src="assets/Logo.svg" alt="Logo"
-					width="100">
-					<h1 class="hFont">Jumpstart</h1>
-				</a>
-			</sec:authorize>
 			
 			<form class="search-form nav flex" action="search" method="get">
 					<input class="search-bar" type="search"
