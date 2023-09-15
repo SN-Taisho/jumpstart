@@ -32,6 +32,12 @@ public class AuthController {
 	@Autowired
 	EmailService emailService;
 	
+	private User getCurrentUser(Principal principal) {
+		String username = principal.getName();
+		User currentUser = userService.findLoginUser(username);
+		return currentUser;
+	}
+	
 //	------------
 //	Registration
 //	------------
@@ -124,8 +130,7 @@ public class AuthController {
 	@GetMapping("/login-success")
 	public String loginSuccess(RedirectAttributes redir, Principal principal) {
 		
-		String username = principal.getName();
-		User user = userService.findLoginUser(username);
+		User user = getCurrentUser(principal);
 		
 		String[] role = user.getRoles().stream().map(Role::getName).toArray(String[]::new);
 		String userRole = role[0];

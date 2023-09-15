@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
@@ -41,10 +42,15 @@
 					<p class="sales" style="margin-top: -12px;">Items sold: ${sales }</p>
 
 					<div class="flex-wrap" style="gap: 1rem;">
-						<button class="add-to-cart"
-							style="margin: 0rem auto 0rem 0rem; padding: 0.7rem 1.25rem; width: 160px;">
+					
+						<sec:authorize access="hasRole('User')">
+						<sf:form action="add_to_cart" method="post" modelAttribute="product" target="dummyframe">
+							<button class="add-to-cart" type="submit" name="id" value="${p.id }" onclick="addToCart()">
 							Add to Cart<i class="material-icons">shopping_cart</i>
 						</button>
+						</sf:form>
+						</sec:authorize>
+						
 						<sec:authorize access="hasAnyRole('Admin','Staff')">
 							<button class="action-btn edit" onclick="window.location.href='/edit-product?pId=${id}'" style="margin: 0rem auto 0rem 0rem; padding: 0.7rem 1.25rem; width: 160px;">
 								Edit Details<i class="material-icons">edit</i>
@@ -58,8 +64,10 @@
 				<p class="desc">${desc }</p>
 			</div>
 		</div>
+		<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 	</div>
 </main>
 
 <script src="js/success-popup.js"></script>
+<script src="js/cart-shake.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

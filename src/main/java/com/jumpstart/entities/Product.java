@@ -1,5 +1,7 @@
 package com.jumpstart.entities;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +21,7 @@ public class Product {
 //	Product Details
 	private String name;
 	private String description;
-	private String price;
+	private BigDecimal price;
 	private int sales;
 	private int stock;
 	
@@ -39,7 +41,7 @@ public class Product {
 		
 	}
 	
-	public Product(Long id, String name, String description, String price, int sales, int stock, String photos,
+	public Product(Long id, String name, String description, BigDecimal price, int sales, int stock, String photos,
 			String photoImagePath, Category category) {
 		super();
 		this.id = id;
@@ -79,11 +81,11 @@ public class Product {
 		this.description = description;
 	}
 
-	public String getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(String price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 

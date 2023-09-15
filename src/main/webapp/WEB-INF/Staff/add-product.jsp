@@ -50,14 +50,12 @@
 
 				<label class="input-group flex-col" style="margin: 1rem 0rem 2rem;">Initial Amount <sf:input
 					type="number" required="true" autocomplete="off" name="stock" path="stock"
-					style="width: 200px;"
-					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+					style="width: 200px;" oninput="this.value = this.value.replace(/[^0-9.]/g, '');" />
 				</label>
 				
-				<label class="input-group flex-col" style="margin: 1rem 0rem 2rem;">Price (USD) <sf:input
-					type="number" required="true" autocomplete="off" name="price" path="price"
-					style="width: 200px;"
-					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+				<label class="input-group flex-col" style="margin: 1rem 0rem 2rem;">&dollar; Price<sf:input
+					type="number" step="0.01" required="true" autocomplete="off" name="price" path="price"
+					style="width: 200px;" oninput="this.value=parseInt(this.value.replace('.',''))/100"/>
 				</label>
 
 				<div class="input-group flex-col">

@@ -89,9 +89,11 @@
 						</sec:authorize>
 						
 						<sec:authorize access="hasRole('User')">
-						<button class="add-to-cart">
+						<sf:form action="add_to_cart" method="post" modelAttribute="product" target="dummyframe">
+							<button class="add-to-cart" type="submit" name="id" value="${p.id }" onclick="addToCart()">
 							Add to Cart<i class="material-icons">shopping_cart</i>
 						</button>
+						</sf:form>
 						</sec:authorize>
 
 						<sec:authorize access="hasAnyRole('Admin','Staff')">
@@ -111,10 +113,11 @@
 			</c:forEach>
 
 		</section>
-
+		<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 	</div>
 </main>
 
 <script src="js/success-popup.js"></script>
 <script src="js/error-popup.js"></script>
+<script src="js/cart-shake.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

@@ -2,6 +2,7 @@ package com.jumpstart.controllers;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -236,7 +237,7 @@ public class ProductController {
 		String descText = product.getDescription();
 		String htmlFormatedText = descText.replace("\r\n", "<br />");
 		product.setDescription(htmlFormatedText);
-
+		
 		thisProduct.setName(product.getName());
 		thisProduct.setDescription(product.getDescription());
 		thisProduct.setCategory(product.getCategory());

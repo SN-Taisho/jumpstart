@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 
@@ -23,7 +24,7 @@
 		<sec:authorize access="hasAnyRole('Admin','Staff')">
 			<div class="selection-wrapper">
 				<button class="default"
-					onclick="window.location.href='product-management'">Product-Management</button>
+					onclick="window.location.href='products'">Product-Management</button>
 				<button onclick="window.location.href='categories'">Categories</button>
 				<button onclick="window.location.href='add-product'">Add a
 					New Product</button>
@@ -32,9 +33,7 @@
 			</div>
 		</sec:authorize>
 
-
 		<jsp:include page="../Components/category-selection.jsp"></jsp:include>
-		
 		<section class="product-list">
 
 			<c:forEach items="${products }" var="p">
@@ -52,11 +51,13 @@
 						</sec:authorize>
 						
 						<sec:authorize access="hasRole('User')">
-						<button class="add-to-cart">
+						<sf:form action="add_to_cart" method="post" modelAttribute="product" target="dummyframe">
+							<button class="add-to-cart" type="submit" name="id" value="${p.id }" onclick="addToCart()">
 							Add to Cart<i class="material-icons">shopping_cart</i>
 						</button>
+						</sf:form>
 						</sec:authorize>
-
+						
 						<sec:authorize access="hasAnyRole('Admin','Staff')">
 							<button class="action-btn edit"
 								style="margin: 0rem 1rem 1rem auto;"
@@ -69,14 +70,17 @@
 								Delete<i class="material-icons">delete</i>
 							</button>
 						</sec:authorize>
+						
 					</div>
 				</c:if>
 			</c:forEach>
 
 		</section>
+		<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
 	</div>
 </main>
 
 <script src="js/success-popup.js"></script>
+<script src="js/cart-shake.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

@@ -52,7 +52,7 @@
 			</c:if>
 
 			<ul id="nav-links" class="align-center list-style-none hFont">
-				<li><a href="/cart" class="align-center" style="color: var(--secondary);"><i
+				<li><a href="/cart" class="align-center" style="color: var(--secondary);"><i id="cart"
 						class="material-icons" style="margin-right: 0rem;">shopping_cart</i></a></li>
 						
 				<li><a href="/my-profile" class="alt align-center"><i
