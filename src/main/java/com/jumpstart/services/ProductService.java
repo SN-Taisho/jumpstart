@@ -44,6 +44,14 @@ public class ProductService {
 	public List<Product> getProductsByCategory(Category selectedCategory) {
 		return productRepo.getByCategory(selectedCategory);
 	}
+	
+	public List<Product> searchProducts(String keyword) {
+		return productRepo.searchAllProducts(keyword);
+	}
+	
+	public List<Product> filteredSearch(String keyword, Category selectedCategory) {
+		return productRepo.filteredSearch(keyword, selectedCategory);
+	}
 
 //	------------------
 //	Product Management

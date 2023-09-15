@@ -1,9 +1,12 @@
 /*----------  Post-login Navbar  ----------*/
 
 /* Search Bar */
-.search-form {
+.search-form.nav {
 	margin: auto 1rem;
 	width: 50%;
+}
+.search-form.page {
+	width: clamp(300px, 70%, 640px);
 }
 
 .search-bar {
@@ -563,6 +566,10 @@
 @media only screen and  (max-width: 600px)   {
 	.search-form.nav {
 		display: none;
+	}
+	.search-form.page {
+		margin: 0rem auto;
+		width: 90%;
 	}
 	.product-card:hover {
 		transform: scale(1);;

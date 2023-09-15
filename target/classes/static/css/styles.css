@@ -182,6 +182,7 @@ main {
 /* Section Headings */
 h2.section-heading {
 	color: var(--primary);
+	font-family: var(--hFont);
 	font-size: 2rem;
 	font-weight: bold;
 	letter-spacing: 2px;

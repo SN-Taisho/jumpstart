@@ -73,9 +73,4 @@ public class UserController {
 	public String cartPage() {
 		return "User/cart";
 	}
-	
-	@GetMapping("/search")
-	public String searchPage() {
-		return "User/search";
-	}
 }
