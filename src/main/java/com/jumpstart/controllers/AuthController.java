@@ -143,7 +143,7 @@ public class AuthController {
 				if (userRole.equals("Admin")) {
 					String successMsg = "Logged as Administrator";
 					redir.addFlashAttribute("successMsg", successMsg);
-					return "redirect:products";
+					return "redirect:user-management";
 				}
 				if (userRole.equals("Staff")) {
 					String successMsg = "Logged as Staff Member";
@@ -209,6 +209,7 @@ public class AuthController {
 			body += "<p>If this request was not made by you, please contact our support team at support@abcjobs.com.</p>";
 
 			emailService.sendEmail(toEmail, subject, body);
+			System.out.println("Verification code for user " + user.getUsername() + ": " + code);
 			return "redirect:verify-identity?email=" + user.getEmail();
 		} 
 		else {

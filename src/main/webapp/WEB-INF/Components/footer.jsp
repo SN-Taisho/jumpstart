@@ -33,16 +33,20 @@
 					<sec:authorize access="hasRole('User')">
 					<ul class="foot-links align-start flex-col list-style-none">
 						<h5 class="footer-subheader">Jumpstart</h5>
-						<li><a href="/dashboard">Products</a></li>
+						<li><a href="/products">Products</a></li>
 						<li><a href="/cart">My Cart</a></li>
 						<li><a href="/my-profile">My Profile</a></li>
 					</ul>
 					</sec:authorize>
 					
-					<sec:authorize access="hasRole('Staff')">
+					<sec:authorize access="hasAnyRole('Staff', 'Admin')">
 					<ul class="foot-links align-start flex-col list-style-none">
-						<h5 class="footer-subheader">Products</h5>
-						<li><a href="/product-management">Manage</a></li>
+						<h5 class="footer-subheader">Manage</h5>
+						<sec:authorize access="hasRole('Admin')">
+							<li><a href="/user-management">Users</a></li>
+						</sec:authorize>
+						<li><a href="/categories">Categories</a></li>
+						<li><a href="/products">Products</a></li>
 						<li><a href="/add-product">Add</a></li>
 						<li><a href="/in-store-pickups">Pickups</a></li>
 						<li><a href="/deliveries">Deliveries</a></li>

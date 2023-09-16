@@ -52,9 +52,22 @@
 			</c:if>
 
 			<ul id="nav-links" class="align-center list-style-none hFont">
+			
+				<sec:authorize access="hasRole('User')">
 				<li><a href="/cart" class="align-center" style="color: var(--secondary);"><i id="cart"
 						class="material-icons" style="margin-right: 0rem;">shopping_cart</i></a></li>
-						
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('Staff')">
+				<li><a href="/products" class="align-center" style="color: var(--secondary);"><i
+						class="material-icons" style="margin-right: 0rem;">shopping_bag</i></a></li>
+				</sec:authorize>
+				
+				<sec:authorize access="hasRole('Admin')">
+				<li><a href="/user-management" class="align-center" style="color: var(--secondary);"><i
+						class="material-icons" style="margin-right: 0rem;">admin_panel_settings</i></a></li>
+				</sec:authorize>
+				
 				<li><a href="/my-profile" class="alt align-center"><i
 						class="material-icons" style="margin-right: 0.5rem;">account_circle</i>Profile</a></li>
 			</ul>
@@ -68,16 +81,32 @@
 
 	<nav class="nav-menu">
 		<ul class="nav-menu-links">
+		
 			<li><a href="/my-profile">Profile</a></li>
+			
+			<sec:authorize access="hasRole('User')">
 			<li><a href="/dashboard">Dashboard</a></li>
 			<li><a href="/cart">Cart</a></li>
 			<li><a href="/purhcases">Purchases</a></li>
-			<li><a href="/purhcases">Search</a></li>
+			</sec:authorize>
+			
+			<sec:authorize access="hasAnyRole('Staff', 'Admin')">
+				<sec:authorize access="hasRole('Admin')">
+				<li><a href="/user-management">User Management</a></li>
+				</sec:authorize>
+			<li><a href="/products">Products</a></li>
+			<li><a href="/categories">Categories</a></li>
+			<li><a href="/add-product">New Product</a></li>
+			</sec:authorize>
+			
+			<li><a href="/search">Search</a></li>
+			
 			<form action="logout" method="post">
 				<input type="hidden" name="${_csrf.parameterName}"
 					value="${_csrf.token}" /> 
 					<input type="submit" name="Logout"
 					value="Logout" class="logout-btn" />
 			</form>
+			
 		</ul>
 	</nav>

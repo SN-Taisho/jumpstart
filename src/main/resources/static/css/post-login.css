@@ -311,30 +311,6 @@
 	outline-offset: 3px;
 }
 
-.edit-product {
-	align-items: center;
-	background-color: var(--auth);
-	border: none;
-	border-radius: 5px;
-	color: var(--white);
-	cursor: pointer;
-	display: flex;
-	font-family: var(--pFont);
-	font-size: 1rem;
-	font-weight: bold;
-	justify-content: space-between;
-	margin: 10px 15px 15px auto;
-	outline: 2px solid transparent;
-	outline-offset: -2px;
-	padding: 7px 10px;
-	width: 130px;
-	transition: 0.2s ease-out;
-}
-.edit-product:hover {
-	outline: 2px solid var(--auth);
-	outline-offset: 3px;
-}
-
 /*----------  Prouct Details  ----------*/
 .product-details-container {
 	align-items: start;

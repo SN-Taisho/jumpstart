@@ -23,7 +23,7 @@
 
 .res-table th,
 .res-table td {
-  padding: 0.5rem;
+  padding: 12px;
   text-align: center;
 }
 
@@ -41,6 +41,36 @@
 	vertical-align: middle;
 }
 
+/* Change Role Form */
+.role-form {
+	align-items: cetner;
+	display: flex;
+	margin: 0rem auto;
+	width: fit-content;
+}
+.role-form select {
+	background-color: var(--secondary);
+	border: 2px solid transparent;
+	color: var(--paragraph);
+	font-size: 1.1rem;
+	margin-right: 10px;
+	outline: none;
+	padding: 5px 0px;
+	width: 100px;
+	text-align: center;
+	transition: ease-out 0.3s;
+}
+.role-form select:focus	 {
+	border: 2px solid var(--auth);
+}
+
+.role-form {
+	height: 46px;
+}
+.role-form .action-btn {
+	margin: 0px;
+}
+
 .res-table td.actions {
 	display: flex;
 	flex-wrap: wrap;
@@ -51,16 +81,48 @@
 	margin: auto 0rem;
 }
 
-@media screen and (max-width: 600px) {
-  .res-table {
+/*----------  Save Role Animation ----------*/
+.saved {
+	animation: saved 1s ease;
+}
+
+@keyframes saved {
+    10% {
+	    background-color: var(--success);
+		color: var(--paragraph);
+		outline: 2px solid var(--success);
+        transform: scale(1.2);
+    }
+    20% {
+    	opacity: 1;
+    	transform: translateY(0);
+    }
+    30% {
+    	opacity: 0.5;
+		transform: translateY(-15px);
+    }
+    40% {
+		opacity: 0;
+		transform: translateY(-15px);
+    }
+    50% {
+   		opacity: 0;
+    }
+    60% {
+    	opacity: 0;
+    }
+}
+
+@media screen and (max-width: 900px) {
+	.res-table.wide {
     border: 0;
   }
 
-  .res-table caption {
-    font-size: 1.3em;
+  .res-table.wide caption {
+    font-size: 1.3rem;
   }
   
-  .res-table thead {
+  .res-table.wide thead {
     border: none;
     clip: rect(0 0 0 0);
     height: 1px;
@@ -71,24 +133,33 @@
     width: 1px;
   }
   
-  .res-table tr {
+  .res-table.wide tr {
     border-bottom: 3px solid #ddd;
     display: block;
-    margin-bottom: .625em;
+    margin-bottom: .5rem;
   }
   
-  .res-table td {
+  .res-table.wide td {
     border-bottom: 1px solid #ddd;
     display: block;
     font-size: 0.8rem;
     text-align: right;
   }
   
-  .res-table td.actions {
+  .res-table.wide .role-form {
+  	margin: 0rem 0rem 0rem auto;
+  }
+  
+  .res-table.wide .input-select {
+  	font-size: 0.9rem;
+  }
+  
+  .res-table.wide td.actions {
+  	display: flex;
   	justify-content: right;
   }
   
-  .res-table td::before {
+  .res-table.wide td::before {
     /*
     * aria-label has no advantage, it won't be read inside a .res-table
     content: attr(aria-label);
@@ -100,11 +171,70 @@
     text-transform: uppercase;
   }
   
-  .res-table td.actions::before {
+  .res-table.wide td.actions::before {
   	margin-right: auto;
   }
   
-  .res-table td:last-child {
+  .res-table.wide td:last-child {
+    border-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .res-table.small {
+    border: 0;
+  }
+
+  .res-table.small caption {
+    font-size: 1.3rem;
+  }
+  
+  .res-table.small thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  .res-table.small tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .5rem;
+  }
+  
+  .res-table.small td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 0.8rem;
+    text-align: right;
+  }
+  
+  .res-table.small td.actions {
+  	display: flex;
+  	justify-content: right;
+  }
+  
+  .res-table.small td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a .res-table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    color: var(--accent);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .res-table.small td.actions::before {
+  	margin-right: auto;
+  }
+  
+  .res-table.small td:last-child {
     border-bottom: 0;
   }
 }

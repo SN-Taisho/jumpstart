@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <c:forEach items="${product}" var="p">
 	<c:set var="id" value="${p.id}"></c:set>
@@ -23,6 +25,9 @@
 	<div class="width-limiter" style="padding: 0rem 2rem;">
 
 		<div class="selection-wrapper">
+			<sec:authorize access="hasRole('Admin')">
+					<button onclick="window.location.href='user-management'">User-Management</button>
+			</sec:authorize>
 			<button onclick="window.location.href='products'">Product Management</button>
 			<button onclick="window.location.href='categories'">Categories</button>
 			<button onclick="window.location.href='add-product'">Add a New Product</button>

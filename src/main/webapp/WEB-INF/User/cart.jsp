@@ -22,7 +22,8 @@
 		
 		<div class="cart-wrapper" style="margin-bottom: 3rem;">
 			<div class="item-container">
-
+				
+				<c:if test="${not empty cartItems }">
 				<c:set var="total" value="${0}"/>
 				<c:forEach items="${cartItems }" var="c" varStatus="item">
 					<c:set var="total" value="${total + c.getProduct().getPrice() * c.count}" />
@@ -50,6 +51,14 @@
 					</div>
 					
 				</c:forEach>
+				</c:if>
+
+				<c:if test="${empty cartItems }">
+					<div class="flex-col align-center" style="background-color: var(--secondary); border-radius: 10px; padding-bottom: 1.5rem;">
+						<h2 class="section-heading text-center" style="color: var(--white);">No Items in cart yet</h2>
+						<button class="submit-button" type="button" onclick="window.location.href='products'">Shop Now!</button>
+					</div>
+				</c:if>
 
 			</div>
 			<div class="cart-details">

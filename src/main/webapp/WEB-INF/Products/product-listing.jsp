@@ -23,6 +23,9 @@
 
 		<sec:authorize access="hasAnyRole('Admin','Staff')">
 			<div class="selection-wrapper">
+				<sec:authorize access="hasRole('Admin')">
+					<button onclick="window.location.href='user-management'">User-Management</button>
+				</sec:authorize>
 				<button class="default"
 					onclick="window.location.href='products'">Product-Management</button>
 				<button onclick="window.location.href='categories'">Categories</button>
@@ -36,7 +39,8 @@
 		<jsp:include page="../Components/category-selection.jsp"></jsp:include>
 		<section class="product-list">
 
-			<c:forEach items="${products }" var="p">
+			<c:if test="${not empty products }">
+			<c:forEach items="${products }" var="p" varStatus="item">
 				<c:if test="${p.stock > 0}">
 					<div class="product-card">
 						<a class="card-img-wrapper" href="/product-details?pId=${p.id}">
@@ -57,29 +61,66 @@
 						</button>
 						</sf:form>
 						</sec:authorize>
-						
-						<sec:authorize access="hasAnyRole('Admin','Staff')">
-							<button class="action-btn edit"
-								style="margin: 0rem 1rem 1rem auto;"
-								onclick="window.location.href='edit-product?pId=${p.id}'">
-								Edit Details<i class="material-icons">edit</i>
-							</button>
-							<button class="action-btn delete"
-								style="margin: 0rem 1rem 1rem auto;"
-								onclick="window.location.href='delete_product?pId=${p.id}'">
-								Delete<i class="material-icons">delete</i>
-							</button>
-						</sec:authorize>
-						
-					</div>
+
+							<sec:authorize access="hasAnyRole('Admin','Staff')">
+								<div class="justify-around" style="margin-bottom: 1rem;">
+									<button class="action-btn edit"
+										onclick="window.location.href='edit-product?pId=${p.id}'">
+										Edit Details<i class="material-icons">edit</i>
+									</button>
+									<button id="openDeleteM${item.count }" class="action-btn delete">
+										Delete<i class="material-icons">delete</i>
+									</button>
+								</div>
+							</sec:authorize>
+
+						</div>
 				</c:if>
 			</c:forEach>
-
+			</c:if>
+			
+			<c:if test="${empty products }">
+				<div>
+					<h2 class="section-heading text-center">No Products Available</h2>
+				</div>
+			</c:if>
+			
 		</section>
 		<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
 	</div>
 </main>
+
+<c:forEach items="${products }" var="p" varStatus="item">
+<dialog id="deleteConfM${item.count }"
+		class="modal" style="height: fit-content; margin-top: 25vh;">
+
+	<h3 class="modal-heading">
+		Confirm<br>Delete Product?
+	</h3>
+
+	<button class="action-btn delete btnAnimation" type="button"
+		onclick="window.location.href='delete_product?pId=${p.id}'"
+		style="margin: 1.5rem auto 0.5rem;">Delete</button>
+
+	<button id="closeDeleteM${item.count }"
+		class="material-icons modal-close">close</button>
+	</dialog>
+
+	<script>
+const deleteConfM${item.count } = document.querySelector("#deleteConfM${item.count }");
+const openDeleteM${item.count } = document.querySelector("#openDeleteM${item.count }");
+const closeDeleteM${item.count } = document.querySelector("#closeDeleteM${item.count }");
+
+openDeleteM${item.count }.addEventListener("click", () => {
+	deleteConfM${item.count }.showModal();
+	});
+
+closeDeleteM${item.count }.addEventListener("click", () => {
+	deleteConfM${item.count }.close();
+	});
+</script>
+</c:forEach>
 
 <script src="js/success-popup.js"></script>
 <script src="js/cart-shake.js"></script>

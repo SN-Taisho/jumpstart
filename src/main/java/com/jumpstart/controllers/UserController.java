@@ -124,17 +124,6 @@ public class UserController {
 //	---------------
 //	Cart Management
 //	---------------
-	@GetMapping("/remove_from_cart")
-	public String removeFromCart(@RequestParam Long cId, RedirectAttributes redir) {
-		
-		cartService.removeFromCart(cId);
-		
-		String successMsg = "Item successfully removed";
-		redir.addFlashAttribute("successMsg", successMsg);
-		
-		return "redirect:/cart";
-	}
-	
 	@PostMapping("/edit_cartItem_amount")
 	public String editCartItem(@ModelAttribute("cartItem") Cart cartItem, 
 			@PathParam("cId") Long cId, RedirectAttributes redir) {
@@ -150,4 +139,14 @@ public class UserController {
 		return "redirect:/cart";
 	}
 	
+	@GetMapping("/remove_from_cart")
+	public String removeFromCart(@RequestParam Long cId, RedirectAttributes redir) {
+		
+		cartService.removeFromCart(cId);
+		
+		String successMsg = "Item successfully removed";
+		redir.addFlashAttribute("successMsg", successMsg);
+		
+		return "redirect:/cart";
+	}
 }

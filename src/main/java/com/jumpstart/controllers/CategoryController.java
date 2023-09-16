@@ -45,17 +45,6 @@ public class CategoryController {
 //	------------------
 //	Category Management
 //	-------------------
-	@GetMapping("/delete_category")
-	public String deleteProduct(@RequestParam Long cId, RedirectAttributes redir) {
-		
-		System.out.println(cId + "Don't forget to enable me (deletion)");
-		
-		String successMsg = "Product has been successfully deleted";
-		redir.addFlashAttribute("successMsg", successMsg);
-		
-		return "redirect:/categories";
-	}
-	
 	@PostMapping("/edit_category")
 	public String editCategory(@ModelAttribute("category") Category category, @RequestParam Long cId,
 			RedirectAttributes redir) {
@@ -68,6 +57,17 @@ public class CategoryController {
 		categoryService.save(thisCategory);
 		
 		String successMsg = thisCategory.getName() + " category has been successfully updated";
+		redir.addFlashAttribute("successMsg", successMsg);
+		
+		return "redirect:/categories";
+	}
+	
+	@GetMapping("/delete_category")
+	public String deleteProduct(@RequestParam Long cId, RedirectAttributes redir) {
+		
+		System.out.println(cId + "Don't forget to enable me (deletion)");
+		
+		String successMsg = "Product has been successfully deleted";
 		redir.addFlashAttribute("successMsg", successMsg);
 		
 		return "redirect:/categories";

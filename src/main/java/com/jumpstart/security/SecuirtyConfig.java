@@ -52,24 +52,63 @@ public class SecuirtyConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/js/**").permitAll()
                     .antMatchers(HttpMethod.GET, "/favicon.*").permitAll()
                     .antMatchers(HttpMethod.GET, "/home").permitAll()
+//                    Login
                     .antMatchers(HttpMethod.GET, "/login").permitAll()
-                    .antMatchers(HttpMethod.GET, "/registration").permitAll()
+                    .antMatchers(HttpMethod.GET, "/login-success").permitAll()
+                    
+//                    Forgot Password
+                    .antMatchers(HttpMethod.GET, "/forgot-password").permitAll()
+                    .antMatchers(HttpMethod.POST, "/reset_request").permitAll()
+                    .antMatchers(HttpMethod.GET, "/verify-identity").permitAll()
+                    .antMatchers(HttpMethod.POST, "/verify_identity").permitAll()
+                    .antMatchers(HttpMethod.GET, "/reset-password").permitAll()
+                    .antMatchers(HttpMethod.POST, "/reset_password").permitAll()
+                    .antMatchers(HttpMethod.GET, "/password-changed").permitAll() 
+                    
+//                    Registration
+                    .antMatchers(HttpMethod.GET, "/signup").permitAll()
+                    .antMatchers(HttpMethod.GET, "/sign_up").permitAll()
+                    .antMatchers(HttpMethod.GET, "/verify-registration").permitAll()
+                    .antMatchers(HttpMethod.POST, "/verify_registration").permitAll()
+                    .antMatchers(HttpMethod.GET, "/thank-you").permitAll()
+                    
+//                    Public Pages
                     .antMatchers(HttpMethod.GET, "/about-us").permitAll()      
                     .antMatchers(HttpMethod.GET, "/contact-us").permitAll() 
                     .antMatchers(HttpMethod.GET, "/privacy-policy").permitAll() 
                     .antMatchers(HttpMethod.GET, "/terms-and-conditions").permitAll() 
                     
+//                    All Roles
                     .antMatchers(HttpMethod.GET, "/my-profile").hasAnyRole("User", "Staff", "Admin")
                     .antMatchers(HttpMethod.GET, "/update_profile").hasAnyRole("User", "Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/products").hasAnyRole("User", "Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/product-details").hasAnyRole("User", "Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/search").hasAnyRole("User", "Staff", "Admin")
                     
-//                    .antMatchers(HttpMethod.GET, "/homepage").hasAnyRole("User", "Admin")
-//                    .antMatchers(HttpMethod.GET, "/view-profile").hasAnyRole("User", "Admin")
-//                    .antMatchers(HttpMethod.GET, "/search").hasAnyRole("User", "Admin")
-//                    
-//                    .antMatchers(HttpMethod.GET, "/user-management").hasRole("Admin")
-//                    .antMatchers(HttpMethod.POST, "reassign_user").hasRole("Admin")
-//                    .antMatchers(HttpMethod.POST, "update_user_profile").hasRole("Admin")
-//                    .antMatchers(HttpMethod.POST, "delete_user").hasRole("Admin")
+//                    User Only
+                    .antMatchers(HttpMethod.GET, "/cart").hasRole("User")
+                    .antMatchers(HttpMethod.POST, "/add_to_cart").hasRole("User")
+                    .antMatchers(HttpMethod.POST, "/edit_cartItem_amount").hasRole("User")
+                    .antMatchers(HttpMethod.GET, "/remove_from_cart").hasRole("User")
+                    
+//                    Staff + Admin Only
+                    .antMatchers(HttpMethod.GET, "/categories").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.POST, "/create_category").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.POST, "/edit_category").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/delete_category").hasAnyRole("Staff", "Admin")
+                    
+                    .antMatchers(HttpMethod.GET, "/product-management").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/add-product").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.POST, "/add_product").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/edit-product").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.POST, "/edit_product").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.POST, "/delete_product").hasAnyRole("Staff", "Admin")
+                    
+//                    Admin Only
+                    .antMatchers(HttpMethod.GET, "/user-management").hasRole("Admin")
+                    .antMatchers(HttpMethod.POST, "/reassign_user").hasRole("Admin")
+                    .antMatchers(HttpMethod.POST, "/edit_user_info").hasRole("Admin")
+                    .antMatchers(HttpMethod.POST, "/delete_user").hasRole("Admin")
                 .and()
                 .logout()
                     .logoutSuccessUrl("/logout")
