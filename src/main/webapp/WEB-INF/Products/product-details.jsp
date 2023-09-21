@@ -45,7 +45,7 @@
 					
 						<sec:authorize access="hasRole('User')">
 						<sf:form action="add_to_cart" method="post" modelAttribute="product" target="dummyframe">
-							<button class="add-to-cart" type="submit" name="id" value="${p.id }" onclick="addToCart()">
+							<button class="add-to-cart" type="submit" name="id" value="${id }" onclick="addToCart()">
 							Add to Cart<i class="material-icons">shopping_cart</i>
 						</button>
 						</sf:form>

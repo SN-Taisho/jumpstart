@@ -26,6 +26,9 @@
 	--transMedium: #e6e6e680;
 	--transLight: #f5f6ff80;
 	
+	/* Payment Colors */
+	--paypal: #253B80;
+	
 	/* Fonts */
 	--hFont: Montserrat, verdana;
 	--pFont: Hind, sans-serif;

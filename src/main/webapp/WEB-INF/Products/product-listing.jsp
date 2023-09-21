@@ -35,7 +35,11 @@
 				<button>Delivery Orders</button>
 			</div>
 		</sec:authorize>
-
+		
+		<sec:authorize access="hasAnyRole('Admin','Staff')">
+		<button id="openEditShipping" class="submit-button" type="button">Edit Shipping Fee</button>
+		</sec:authorize>
+					
 		<jsp:include page="../Components/category-selection.jsp"></jsp:include>
 		<section class="product-list">
 
@@ -121,6 +125,42 @@ closeDeleteM${item.count }.addEventListener("click", () => {
 	});
 </script>
 </c:forEach>
+
+<sec:authorize access="hasAnyRole('Admin','Staff')">
+<dialog id="editShippingM" class="modal"
+	style="height: fit-content; margin-top: 25vh;">
+
+<h3 class="modal-heading">Shipping Fee?</h3>
+
+	<sf:form class="align-center flex-col form" method="post"
+		action="edit_shippingFee">
+		<label class="input-group flex-col" style="width: 80%;">Base
+			Shipping Fee<input type="number" required autocomplete="off"
+			name="shippingFee" value="${shippingFee }" step="0.01"
+			oninput="this.value=parseInt(this.value.replace('.',''))/100" />
+		</label>
+
+		<button class="submit-button save btnAnimation" type="submit"
+			style="margin: auto;">Save</button>
+	</sf:form>
+
+<button id="closeEditShipping" class="material-icons modal-close">close</button>
+</dialog>
+
+<script>
+const editShippingM = document.querySelector("#editShippingM");
+const openEditShipping = document.querySelector("#openEditShipping");
+const closeEditShipping = document.querySelector("#closeEditShipping");
+
+openEditShipping.addEventListener("click", () => {
+	editShippingM.showModal();
+	});
+
+closeEditShipping.addEventListener("click", () => {
+	editShippingM.close();
+	});
+</script>
+</sec:authorize>
 
 <script src="js/success-popup.js"></script>
 <script src="js/cart-shake.js"></script>

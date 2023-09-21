@@ -12,7 +12,7 @@
 </c:forEach>
 
 <jsp:include page="../Components/nav-bar.jsp">
-	<jsp:param value="Product Name" name="HTMLtitle" />
+	<jsp:param value="My Profile" name="HTMLtitle" />
 </jsp:include>
 
 <div class="page-divider"></div>

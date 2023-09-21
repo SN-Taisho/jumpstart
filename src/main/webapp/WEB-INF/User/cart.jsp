@@ -25,8 +25,10 @@
 				
 				<c:if test="${not empty cartItems }">
 				<c:set var="total" value="${0}"/>
+				<c:set var="itemCount" value="${0}"/>
 				<c:forEach items="${cartItems }" var="c" varStatus="item">
 					<c:set var="total" value="${total + c.getProduct().getPrice() * c.count}" />
+					<c:set var="itemCount" value="${itemCount + 1 }"/>
 					<div class="cart-item">
 						<a class="ci-img-wrapper"
 							href="/product-details?pId=${c.getProduct().getId() }"> <img
@@ -62,10 +64,19 @@
 
 			</div>
 			<div class="cart-details">
+				
+				<c:if test="${itemCount > 4 }">
+					<p class="cart-total justify-between"><span>Shipping Fee:</span> <span>&dollar;${shippingFee * 2}</span></p>
+				</c:if>
+				<c:if test="${itemCount <= 4 }">
+					<p class="cart-total justify-between"><span>Shipping Fee:</span> <span>&dollar;${shippingFee * 2}</span></p>
+				</c:if>
+				<p style="margin-top: -1rem;">(only applies for deliveries)</p>
+				
 				<h4 class="cart-total justify-between">
-					<span>Total :</span> <span>&dollar; ${total }</span>
+					<span>Total :</span> <span>&dollar; ${total}</span>
 				</h4>
-				<button class="checkout">Proceed to Checkout</button>
+				<button class="checkout" onclick="window.location.href='checkout'">Proceed to Checkout</button>
 			</div>
 		</div>
 		<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
@@ -86,8 +97,7 @@
 			oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
 		</label>
 
-		<button class="submit-button save btnAnimation" type="submit"
-			style="margin: 0rem auto;">Save</button>
+		<button class="submit-button save btnAnimation" type="submit" style="margin: auto;">Save</button>
 
 	</sf:form>
 	<button id="closeEditAmount${item.count }"

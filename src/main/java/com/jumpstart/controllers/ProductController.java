@@ -25,8 +25,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jumpstart.entities.Category;
 import com.jumpstart.entities.Product;
+import com.jumpstart.entities.ShippingFee;
 import com.jumpstart.services.CategoryService;
 import com.jumpstart.services.ProductService;
+import com.jumpstart.services.ShippingFeeService;
 
 @Controller
 public class ProductController {
@@ -36,6 +38,9 @@ public class ProductController {
 
 	@Autowired
 	ProductService productService;
+	
+	@Autowired
+	ShippingFeeService shippingFeeService;
 
 //	-----------------
 //	Product's Display
@@ -43,6 +48,9 @@ public class ProductController {
 	@GetMapping("/products")
 	public String byCategory(@RequestParam(name = "category", required = false) String category, Model model) {
 
+		ShippingFee shippingFee = shippingFeeService.getShippingFee();
+		model.addAttribute("shippingFee", shippingFee.getShippingFee());
+		
 		List<Category> categories = categoryService.getAllCategories();
 		model.addAttribute("categories", categories);
 
@@ -263,6 +271,21 @@ public class ProductController {
 		String successMsg = "Category has been successfully deleted";
 		redir.addFlashAttribute("successMsg", successMsg);
 
+		return "redirect:/products";
+	}
+	
+//	-----------------
+//	Edit Shipping Fee
+//	-----------------
+	@PostMapping("/edit_shippingFee")
+	public String editShippignFee(@RequestParam("shippingFee") BigDecimal newFee,
+			RedirectAttributes redir) {
+		
+		ShippingFee thisFee = shippingFeeService.getShippingFee();
+		thisFee.setShippingFee(newFee);
+		shippingFeeService.save(thisFee);
+		
+		redir.addFlashAttribute("successMsg", "Shipping fee changed to " + thisFee.getShippingFee());
 		return "redirect:/products";
 	}
 }

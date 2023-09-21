@@ -17,10 +17,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jumpstart.entities.Cart;
 import com.jumpstart.entities.Product;
+import com.jumpstart.entities.ShippingFee;
 import com.jumpstart.entities.User;
 import com.jumpstart.services.CartService;
 import com.jumpstart.services.CategoryService;
 import com.jumpstart.services.ProductService;
+import com.jumpstart.services.ShippingFeeService;
 import com.jumpstart.services.UserService;
 
 
@@ -38,6 +40,9 @@ public class UserController {
 	
 	@Autowired
 	CartService cartService;
+	
+	@Autowired
+	ShippingFeeService shippingFeeService;
 
 	private User getCurrentUser(Principal principal) {
 		String username = principal.getName();
@@ -45,6 +50,9 @@ public class UserController {
 		return currentUser;
 	}
 	
+//	--------------------
+//	Display User Profile
+//	--------------------
 	@GetMapping("/my-profile")
 	public String myProfilePage(Principal principal, Model model) {
 		
@@ -60,7 +68,7 @@ public class UserController {
 	}
 	
 //	-----------------------
-//	UPDATE PERSONAL PROFILE
+//	Update Personal Profile
 //	-----------------------
 	@PostMapping("update_profile")
 	public String updateProfileInfo(Principal principal, @ModelAttribute("user") User u, RedirectAttributes redir) {
@@ -86,6 +94,9 @@ public class UserController {
 		User currentUser = getCurrentUser(principal);
 		List<Cart> cartItems = cartService.getUserCart(currentUser);
 		
+		ShippingFee shippingFee = shippingFeeService.getShippingFee();
+		
+		model.addAttribute("shippingFee", shippingFee.getShippingFee());
 		model.addAttribute("cartItems", cartItems);
 		return "User/cart";
 	}
@@ -101,6 +112,7 @@ public class UserController {
 		
 		Cart newCartItem = new Cart();
 		Product selectedProduct = productService.findProduct(product.getId());
+		selectedProduct.setStock(selectedProduct.getStock() - 1);
 		
 		for (Cart cartItem : cartItems) {
 			
