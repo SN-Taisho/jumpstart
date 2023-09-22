@@ -28,7 +28,7 @@
 				<c:set var="itemCount" value="${0}"/>
 				<c:forEach items="${cartItems }" var="c" varStatus="item">
 					<c:set var="total" value="${total + c.getProduct().getPrice() * c.count}" />
-					<c:set var="itemCount" value="${itemCount + 1 }"/>
+					<c:set var="itemCount" value="${itemCount + 1  * c.count}"/>
 					<div class="cart-item">
 						<a class="ci-img-wrapper"
 							href="/product-details?pId=${c.getProduct().getId() }"> <img
@@ -65,16 +65,19 @@
 			</div>
 			<div class="cart-details">
 				
+				<p class="cart-total justify-between"><span>Subtotal:</span> <span>&dollar;${total}</span></p>
 				<c:if test="${itemCount > 4 }">
+					<c:set var="shipping" value="${shippingFee * 2 }"></c:set>
 					<p class="cart-total justify-between"><span>Shipping Fee:</span> <span>&dollar;${shippingFee * 2}</span></p>
 				</c:if>
 				<c:if test="${itemCount <= 4 }">
-					<p class="cart-total justify-between"><span>Shipping Fee:</span> <span>&dollar;${shippingFee * 2}</span></p>
+					<c:set var="shipping" value="${shippingFee * 1 }"></c:set>
+					<p class="cart-total justify-between"><span>Shipping Fee:</span> <span>&dollar;${shippingFee * 1}</span></p>
 				</c:if>
 				<p style="margin-top: -1rem;">(only applies for deliveries)</p>
 				
 				<h4 class="cart-total justify-between">
-					<span>Total :</span> <span>&dollar; ${total}</span>
+					<span>Total :</span> <span>&dollar; ${total + shipping}</span>
 				</h4>
 				<button class="checkout" onclick="window.location.href='checkout'">Proceed to Checkout</button>
 			</div>

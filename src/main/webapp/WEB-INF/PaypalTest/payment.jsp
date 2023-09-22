@@ -116,7 +116,7 @@ span.price {
 <div class="row">
     <div class="col-75">
         <div class="container">
-            <sf:form method="post"  action="pay_with_paypal" modelAttribute="order">
+            <sf:form method="post"  action="pay_paypal">
                 <div class="col-50">
                     <h3>Payment</h3>
                     <label>Accepted Cards</label>
@@ -127,16 +127,6 @@ span.price {
                         <i class="fa fa-cc-discover" style="color:orange;"></i>
                     </div>
                     <label for="price">Total</label>
-                    <input type="text" id="price" name="price" value="10">
-                    <label for="currency">Currency</label>
-                    <input type="text" id="currency" name="currency" placeholder="Enter Currency" value="USD">
-                    <label for="method">Payment Method</label>
-                    <input type="text" id="method" name="method" placeholder="Payment Method" value="paypal">
-                    <label for="intent">Intent</label>
-                    <input type="text" id="intent" name="intent" value="sale">
-                    <label for="description">Payment Description</label>
-                    <input type="text" id="description" name="description" placeholder="Payment Description" value="testing">
-
                 </div>
 
                 <input type="submit" value="Continue to checkout" class="btn">

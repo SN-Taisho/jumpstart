@@ -1,10 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+	
+<sec:authorize access="!isAuthenticated()">
+	<jsp:include page="../Components/header.jsp">
+		<jsp:param value="Home" name="HTMLtitle" />
+	</jsp:include>
+</sec:authorize>
 
-<jsp:include page="../Components/header.jsp">
-	<jsp:param value="Sign Up" name="HTMLtitle" />
-</jsp:include>
+<sec:authorize access="isAuthenticated()">
+	<jsp:include page="../Components/nav-bar.jsp">
+		<jsp:param value="Home" name="HTMLtitle" />
+	</jsp:include>
+</sec:authorize>
 
 <div class="page-divider"></div>
 

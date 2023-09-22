@@ -54,7 +54,7 @@
 			</div>
 		</div>
 
-		<h2 class="section-heading hFont text-center" style="margin-top: 3rem;">Order History</h2>
+		<h2 class="section-heading hFont text-center" style="margin-top: 3rem;">Recent Purchases</h2>
 		
 		<div class="item-container" style="width: clamp(250px, 80vw, 500px) !important;">
 

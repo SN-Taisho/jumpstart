@@ -575,27 +575,9 @@
 	border-radius: 10px;
 	padding: 1rem;
 }
-#delivery-form.hidden , #pickup-form.hidden {
+#delivery-form.hidden , #pickup-form.hidden,
+#delivery-total.hidden , #pickup-total.hidden {
 	display: none;
-}
-
-.one-col-input {
-	align-items: center;
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-}
-.one-col-input .input-group {
-	width: clamp(250px, 80%, 400px);
-}
-
-.two-col-input {
-	display: flex;
-	gap: 1rem;
-	justify-content: space-between;
-}
-.two-col-input .input-group {
-	width: clamp(250px, 45%, 350px);
 }
 
 /* Radio Selection */

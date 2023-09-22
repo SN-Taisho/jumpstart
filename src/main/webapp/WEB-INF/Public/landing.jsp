@@ -1,8 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<jsp:include page="../Components/header.jsp">
-	<jsp:param value="Home" name="HTMLtitle" />
-</jsp:include>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+	
+<sec:authorize access="!isAuthenticated()">
+	<jsp:include page="../Components/header.jsp">
+		<jsp:param value="Home" name="HTMLtitle" />
+	</jsp:include>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<jsp:include page="../Components/nav-bar.jsp">
+		<jsp:param value="Home" name="HTMLtitle" />
+	</jsp:include>
+</sec:authorize>
 
 	<main>
 		<div class="width-limiter">
