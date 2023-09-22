@@ -23,7 +23,7 @@
 			
 			<h3 class="pub-heading confirmation">Payment Success</h3>
 			<p class="pub-paragraph text-align-center">${successMsg }</p>
-			<a href="/my-purchases" class="pub-link success btnAnimation">View Purchases!</a>
+			<a href="/ongoing-purchases" class="pub-link success btnAnimation">View Purchases!</a>
 		</div>
 	</div>
 

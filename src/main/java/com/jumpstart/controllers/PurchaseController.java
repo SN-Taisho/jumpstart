@@ -81,7 +81,7 @@ public class PurchaseController {
 	
 	public static final String DELIVERY_SUCCESS_URL = "delivery-purchase-success";
 	public static final String PICKUP_SUCCESS_URL = "pickup-purchase-success";
-	public static final String CANCEL_URL = "paypal/cancel";
+	public static final String CANCEL_URL = "paypal-cancel";
 	
 	@PostMapping("pay_with_paypal")
 	public String paypalPayment(Principal principal, RedirectAttributes redir,
@@ -178,9 +178,6 @@ public class PurchaseController {
 
 				String referenceCode = UUID.randomUUID().toString();
 				
-				DateFormat date = new SimpleDateFormat("dd MMMMM yyyy HH:mm");
-				
-
 				for (Cart cartItem : userCart) {
 
 					Purchase newPurchase = new Purchase();

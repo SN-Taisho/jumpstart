@@ -1,12 +1,12 @@
 package com.jumpstart.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +17,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.jumpstart.entities.Cart;
 import com.jumpstart.entities.Product;
+import com.jumpstart.entities.Purchase;
 import com.jumpstart.entities.ShippingFee;
 import com.jumpstart.entities.User;
 import com.jumpstart.services.CartService;
 import com.jumpstart.services.CategoryService;
 import com.jumpstart.services.ProductService;
+import com.jumpstart.services.PurchaseService;
 import com.jumpstart.services.ShippingFeeService;
 import com.jumpstart.services.UserService;
 
@@ -43,6 +45,9 @@ public class UserController {
 	
 	@Autowired
 	ShippingFeeService shippingFeeService;
+	
+	@Autowired
+	PurchaseService purchaseService;
 
 	private User getCurrentUser(Principal principal) {
 		String username = principal.getName();
@@ -60,8 +65,12 @@ public class UserController {
 			return "redirect:access-denied";
 		}
 		
-		List<User> user = new ArrayList<User>();
-		user.add(getCurrentUser(principal));
+		User user = getCurrentUser(principal);
+		
+		Page<Purchase> recentPurchases = purchaseService.getMostRecentPurchase(user);
+		List<Purchase> recentPurchaseList = recentPurchases.getContent();
+		
+		model.addAttribute("recentPurchases", recentPurchaseList);
 		model.addAttribute("user", user);
 		
 		return "User/my-profile";
@@ -161,4 +170,19 @@ public class UserController {
 		
 		return "redirect:/cart";
 	}
+	
+//	-----------------
+//	Ongoign Purchases
+//	-----------------
+	@GetMapping("/ongoing-purchases")
+	public String ongoingPurchases(Principal principal, Model model) {
+		
+		User user = getCurrentUser(principal);
+		
+		List<Purchase> ongoingPurchases = purchaseService.getUserOngoingPurchases(user);
+		
+		model.addAttribute("ongoingPurchases", ongoingPurchases);
+		return "User/ongoing-purchases";
+	}
+	
 }

@@ -90,6 +90,14 @@ public class SecuirtyConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.POST, "/add_to_cart").hasRole("User")
                     .antMatchers(HttpMethod.POST, "/edit_cartItem_amount").hasRole("User")
                     .antMatchers(HttpMethod.GET, "/remove_from_cart").hasRole("User")
+                    .antMatchers(HttpMethod.GET, "/ongoing-purchases").hasRole("User")
+                    
+//                    User Checkout to Payment
+                    .antMatchers(HttpMethod.GET, "/checkout").hasRole("User")
+                    .antMatchers(HttpMethod.POST, "/pay_with_paypal").hasRole("User")
+                    .antMatchers(HttpMethod.GET, "/paypal-cancel").hasRole("User")
+                    .antMatchers(HttpMethod.GET, "/delivery-purchase-success").hasRole("User")
+                    .antMatchers(HttpMethod.GET, "/pickup-purchase-success").hasRole("User")
                     
 //                    Staff + Admin Only
                     .antMatchers(HttpMethod.GET, "/categories").hasAnyRole("Staff", "Admin")
