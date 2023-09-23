@@ -126,6 +126,13 @@
 	outline-offset: 5px;
 }
 
+.action-btn.approve {
+	background-color: var(--success);
+}
+.action-btn.approve:hover {
+	outline: 2px solid var(--success);
+	outline-offset: 5px;
+}
 
 
 /*----------  Order History  ----------*/

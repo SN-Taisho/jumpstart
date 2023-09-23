@@ -31,8 +31,8 @@
 			<button onclick="window.location.href='products'">Product Management</button>
 			<button onclick="window.location.href='categories'">Categories</button>
 			<button class="default" onclick="window.location.href='add-product'">Add a New Product</button>
-			<button>In-store Pickups</button>
-			<button>Delivery Orders</button>
+			<button onclick="window.location.href='pickup-management'">In-store Pickups</button>
+			<button onclick="window.location.href='delivery-management'">Delivery Orders</button>
 		</div>
 		
 		<section style="background-color: var(--bgDark); border-radius: 5px; margin-bottom: 3rem; padding: 0.5rem;">

@@ -45,7 +45,7 @@
 
 			<c:if test="${empty hideSearch }">
 				<form class="search-form nav flex" action="search" method="get">
-					<input class="search-bar" type="search" placeholder="Search"
+					<input class="search-bar" type="search" placeholder="Product Search"
 						name="keyword" value="${keyword}" />
 					<button class="search-btn material-icons" type="submit">search</button>
 				</form>

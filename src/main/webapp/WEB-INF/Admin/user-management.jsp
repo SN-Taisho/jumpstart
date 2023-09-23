@@ -22,16 +22,19 @@
 			<button class="btnAnimation icon material-icons"
 				onclick="closeSuccess()">close</button>
 		</div>
+		<script src="js/success-popup.js"></script>
 
 		<sec:authorize access="hasAnyRole('Admin','Staff')">
 			<div class="selection-wrapper">
-				<button class="default" onclick="window.location.href='user-management'">User-Management</button>
+				<sec:authorize access="hasRole('Admin')">
+					<button class="default" onclick="window.location.href='user-management'">User-Management</button>
+				</sec:authorize>
 				<button onclick="window.location.href='products'">Product-Management</button>
 				<button onclick="window.location.href='categories'">Categories</button>
 				<button onclick="window.location.href='add-product'">Add a
 					New Product</button>
-				<button>In-store Pickups</button>
-				<button>Delivery Orders</button>
+				<button onclick="window.location.href='pickup-management'">In-store Pickups</button>
+				<button onclick="window.location.href='delivery-management'">Delivery Orders</button>
 			</div>
 		</sec:authorize>
 
@@ -183,5 +186,4 @@ closeDeleteM${item.count }.addEventListener("click", () => {
 
 <iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
-<script src="js/success-popup.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

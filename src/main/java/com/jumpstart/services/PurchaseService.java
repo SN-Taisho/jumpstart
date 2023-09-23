@@ -27,6 +27,10 @@ public class PurchaseService {
 		purchaseRepository.save(purhcase);
 	}
 	
+	public Purchase findPurchase(Long purchaseId) {
+		return purchaseRepository.getById(purchaseId);
+	}
+	
 //	----------------
 //	Purchase Display
 //	----------------
@@ -37,5 +41,13 @@ public class PurchaseService {
 
 	public List<Purchase> getUserOngoingPurchases(User user) {
 		return purchaseRepository.getUserOngoingPurchases(user);
+	}
+	
+	public List<Purchase> getOngoingByMethod(String method) {
+		return purchaseRepository.getByMethodAndReceivedIsNull(method);
+	}
+	
+	public List<Purchase> searchOngoingByMethod(String keyword, String method) {
+		return purchaseRepository.searchPurchases(keyword, method);
 	}
 }

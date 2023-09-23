@@ -6,7 +6,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <jsp:include page="../Components/nav-bar.jsp">
-	<jsp:param value="Pickups" name="HTMLtitle" />
+	<jsp:param value="Delivery Management" name="HTMLtitle" />
 </jsp:include>
 
 <div class="page-divider"></div>
@@ -33,22 +33,22 @@
 				<button onclick="window.location.href='categories'">Categories</button>
 				<button onclick="window.location.href='add-product'">Add a
 					New Product</button>
+				<button onclick="window.location.href='pickup-management'">In-store
+					Pickup</button>
 				<button class="default"
-					onclick="window.location.href='pickup-management'">In-store
-					Pickups</button>
-				<button onclick="window.location.href='delivery-management'">Delivery
+					onclick="window.location.href='delivery-management'">Delivery
 					Orders</button>
 			</div>
 		</sec:authorize>
 		
-		<form class="search-form page flex" action="pickup-management" method="get">
+		<form class="search-form page flex" action="delivery-management" method="get">
 				<input class="search-bar" type="search" placeholder="Search User or Reference Code"
 					name="search" value="${search}" />
 				<button class="search-btn material-icons" type="submit">search</button>
 		</form>
 		
 		<table class="res-table wide" style="max-width: 1440px;">
-			<caption>Pickup Managment</caption>
+			<caption>Delivery Managment</caption>
 			<thead>
 				<tr>
 					<th scope="col">No.</th>
@@ -140,32 +140,32 @@ closeViewUser${item.count}.addEventListener("click", () => {
 	});
 </script>
 
-		<dialog id="confirmPickupM${item.count}" class="modal"
+		<dialog id="confirmDeliveryM${item.count}" class="modal"
 			style="height: fit-content;">
 
 		<h3 class="modal-heading">
-			Confirm<br>Pickup?
+			Confirm<br>Delivery?
 		</h3>
 
 		<button class="action-btn approve btnAnimation" type="button"
-			onclick="window.location.href='pickup_received?pickupId=${p.id}&search=${search }'"
-			style="margin: 1.5rem auto 0.5rem;">Confirm Pickup</button>
+			onclick="window.location.href='delivery_received?deliveryId=${p.id}&search=${search }'"
+			style="margin: 1.5rem auto 0.5rem;">Confirm Delivery</button>
 
-		<button id="closePickupM${item.count}"
+		<button id="closeDeliveryM${item.count}"
 			class="material-icons modal-close">close</button>
 		</dialog>
 
 		<script>
-const confirmPickupM${item.count} = document.querySelector("#confirmPickupM${item.count}");
-const openPickupM${item.count} = document.querySelector("#openPickupM${item.count}");
-const closePickupM${item.count} = document.querySelector("#closePickupM${item.count}");
+const confirmDeliveryM${item.count} = document.querySelector("#confirmDeliveryM${item.count}");
+const openDeliveryM${item.count} = document.querySelector("#openDeliveryM${item.count}");
+const closeDeliveryM${item.count} = document.querySelector("#closeDeliveryM${item.count}");
 
-openPickupM${item.count}.addEventListener("click", () => {
-	confirmPickupM${item.count}.showModal();
+openDeliveryM${item.count}.addEventListener("click", () => {
+	confirmDeliveryM${item.count}.showModal();
 	});
 
-closePickupM${item.count}.addEventListener("click", () => {
-	confirmPickupM${item.count}.close();
+closeDeliveryM${item.count}.addEventListener("click", () => {
+	confirmDeliveryM${item.count}.close();
 	});
 </script>
 	</c:forEach>

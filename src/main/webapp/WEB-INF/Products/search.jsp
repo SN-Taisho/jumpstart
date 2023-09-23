@@ -39,8 +39,8 @@
 				<button onclick="window.location.href='categories'">Categories</button>
 				<button onclick="window.location.href='add-product'">Add a
 					New Product</button>
-				<button>In-store Pickups</button>
-				<button>Delivery Orders</button>
+				<button onclick="window.location.href='pickup-management'">In-store Pickups</button>
+				<button onclick="window.location.href='delivery-management'">Delivery Orders</button>
 			</div>
 		</sec:authorize>
 

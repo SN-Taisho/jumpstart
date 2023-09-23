@@ -2,6 +2,7 @@ package com.jumpstart.controllers;
 
 import java.math.BigDecimal;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -254,18 +255,94 @@ public class PurchaseController {
         return "redirect:/cart";
     }
     
+    
 //	-----------------
 //	Pickup Management
 //	-----------------
     @GetMapping("/pickup-management")
-    public String pickupManagementPage(Model model) {
+    public String pickupManagementPage(Model model, 
+    		@RequestParam(name = "search", required = false) String keyword) {
     	
+    	String method = "Pickup";
+    	List<Purchase> allPickupPurchases = null;
+    	if (keyword == null || keyword == "") {
+    		 allPickupPurchases = purchaseService.getOngoingByMethod(method);
+    	}
+    	
+    	if (keyword != null && keyword != "") {
+    		allPickupPurchases = purchaseService.searchOngoingByMethod(keyword, method);
+		}
+    	
+    	model.addAttribute("purchases", allPickupPurchases);
+    	model.addAttribute("search", keyword);
     	return "Staff/pickup-management";
     }
     
-    @GetMapping("/delivery-management")
-    public String deliveryManagementPage(Model model) {
+    @GetMapping("/pickup_received")
+    public String pickupReceived(RedirectAttributes redir,
+    		@RequestParam(name = "pickupId", required = true) Long purchaseId, 
+    		@RequestParam(name = "search", required = false) String searchString) {
     	
-    	return "Staff/pickup-management";
+    	Purchase thisPurchase = purchaseService.findPurchase(purchaseId);
+    	
+    	thisPurchase.setReceived(LocalDateTime.now());
+    	purchaseService.save(thisPurchase);
+    	
+    	String successMsg = "Pickup Confirmed";
+    	redir.addFlashAttribute("successMsg", successMsg);
+    	
+    	if (searchString == null || searchString == "") {
+    		return "redirect:/pickup-management";
+       	}
+      	
+       	if (searchString != null && searchString != "") {
+       		return "redirect:/pickup-management?search=" + searchString;
+   		}
+       	return "redirect:/pickup-management?search=" + searchString;
+    }
+    
+//	-------------------
+//	Delivery Management
+//	-------------------
+    @GetMapping("/delivery-management")
+    public String deliveryManagementPage(Model model,
+    		@RequestParam(name = "search", required = false) String keyword) {
+    	
+    	String method = "Delivery";
+    	List<Purchase> allDeliveryPurchases = null;
+    	if (keyword == null || keyword == "") {
+   		 allDeliveryPurchases = purchaseService.getOngoingByMethod(method);
+    	}
+   	
+    	if (keyword != null && keyword != "") {
+   		allDeliveryPurchases = purchaseService.searchOngoingByMethod(keyword, method);
+		}
+   	
+	   	model.addAttribute("purchases", allDeliveryPurchases);
+	   	model.addAttribute("search", keyword);
+    	return "Staff/delivery-management";
+    }
+    
+    @GetMapping("/delivery_received")
+    public String deliveryReceived(RedirectAttributes redir,
+    		@RequestParam(name = "deliveryId", required = true) Long purchaseId, 
+    		@RequestParam(name = "search", required = false) String searchString) {
+    	
+    	Purchase thisPurchase = purchaseService.findPurchase(purchaseId);
+    	
+    	thisPurchase.setReceived(LocalDateTime.now());
+    	purchaseService.save(thisPurchase);
+    	
+    	String successMsg = "Delivery Confirmed";
+    	redir.addFlashAttribute("successMsg", successMsg);
+    	
+    	if (searchString == null || searchString == "") {
+    		return "redirect:/delivery-management";
+       	}
+      	
+       	if (searchString != null && searchString != "") {
+       		return "redirect:/delivery-management?search=" + searchString;
+   		}
+       	return "redirect:/delivery-management?search=" + searchString;
     }
 }
