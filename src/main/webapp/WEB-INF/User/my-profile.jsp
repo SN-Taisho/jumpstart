@@ -2,7 +2,9 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
-
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
+	
 <jsp:include page="../Components/nav-bar.jsp">
 	<jsp:param value="My Profile" name="HTMLtitle" />
 </jsp:include>
@@ -43,17 +45,19 @@
 				<span class="profile-label"><i class="material-icons">house</i>Address</span>
 				<c:if test="${user.address eq null }"><p>User provided an address yet.</p></c:if>
 				<p>${user.address }</p>
-
-				<button class="action-btn" style="background-color: var(--accent);"
-					onclick="window.location.href='ongoing-purchases'">
-					Ongoing Purchases<i class="material-icons"
-						style="margin-left: 5px;">pending</i>
-				</button>
-				<button class="action-btn" style="background-color: var(--accent);"
-					onclick="window.location.href='purchase-history'">
-					View Purchase History<i class="material-icons"
-						style="margin-left: 5px;">history</i>
-				</button>
+				
+				<sec:authorize access="hasRole('User')">
+					<button class="action-btn" style="background-color: var(--accent);"
+						onclick="window.location.href='ongoing-purchases'">
+						Ongoing Purchases<i class="material-icons"
+							style="margin-left: 5px;">pending</i>
+					</button>
+					<button class="action-btn" style="background-color: var(--accent);"
+						onclick="window.location.href='purchase-history'">
+						View Purchase History<i class="material-icons"
+							style="margin-left: 5px;">history</i>
+					</button>
+				</sec:authorize>
 			</div>
 		</div>
 

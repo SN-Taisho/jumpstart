@@ -85,12 +85,14 @@ public class SecuirtyConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.GET, "/product-details").hasAnyRole("User", "Staff", "Admin")
                     .antMatchers(HttpMethod.GET, "/search").hasAnyRole("User", "Staff", "Admin")
                     
+                    
 //                    User Only
                     .antMatchers(HttpMethod.GET, "/cart").hasRole("User")
                     .antMatchers(HttpMethod.POST, "/add_to_cart").hasRole("User")
                     .antMatchers(HttpMethod.POST, "/edit_cartItem_amount").hasRole("User")
                     .antMatchers(HttpMethod.GET, "/remove_from_cart").hasRole("User")
                     .antMatchers(HttpMethod.GET, "/ongoing-purchases").hasRole("User")
+                    .antMatchers(HttpMethod.GET, "/purchases-history").hasRole("User")
                     
 //                    User Checkout to Payment
                     .antMatchers(HttpMethod.GET, "/checkout").hasRole("User")
@@ -98,6 +100,7 @@ public class SecuirtyConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.GET, "/paypal-cancel").hasRole("User")
                     .antMatchers(HttpMethod.GET, "/delivery-purchase-success").hasRole("User")
                     .antMatchers(HttpMethod.GET, "/pickup-purchase-success").hasRole("User")
+                    
                     
 //                    Staff + Admin Only
                     .antMatchers(HttpMethod.GET, "/categories").hasAnyRole("Staff", "Admin")
@@ -111,6 +114,12 @@ public class SecuirtyConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers(HttpMethod.GET, "/edit-product").hasAnyRole("Staff", "Admin")
                     .antMatchers(HttpMethod.POST, "/edit_product").hasAnyRole("Staff", "Admin")
                     .antMatchers(HttpMethod.POST, "/delete_product").hasAnyRole("Staff", "Admin")
+                    
+                    .antMatchers(HttpMethod.GET, "/pickup-management").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/pickup_received").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/delivery-management").hasAnyRole("Staff", "Admin")
+                    .antMatchers(HttpMethod.GET, "/delivery_received").hasAnyRole("Staff", "Admin")
+                    
                     
 //                    Admin Only
                     .antMatchers(HttpMethod.GET, "/user-management").hasRole("Admin")

@@ -17,7 +17,9 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 
 	@Query("SELECT p FROM Purchase p WHERE p.user = :user ORDER BY p.ordered DESC")
 	Page<Purchase> getMostRecentPurchases(@Param("user") User user, Pageable pageable);
-
+	
+	List<Purchase> findByUserAndReceivedIsNotNull(User user);
+	
 	@Query("SELECT p FROM Purchase p WHERE p.user = :user AND p.received IS null ORDER BY p.ordered ASC")
 	List<Purchase> getUserOngoingPurchases(@Param("user") User user);
 	
@@ -31,5 +33,4 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 	        + " OR p.user.email LIKE '%' || :keyword || '%'"
 	        + " OR p.product.name LIKE '%' || :keyword || '%')")
 	List<Purchase> searchPurchases(@Param("keyword") String keyword, @Param("method") String method);
-
 }

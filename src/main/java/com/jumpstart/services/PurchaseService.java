@@ -35,8 +35,11 @@ public class PurchaseService {
 //	Purchase Display
 //	----------------
 	public Page<Purchase> getMostRecentPurchase(User user) {
-		
 		return purchaseRepository.getMostRecentPurchases(user, PageRequest.of(0, 5));
+	}
+	
+	public List<Purchase> getUserCompletedPurchases(User user) {
+		return purchaseRepository.findByUserAndReceivedIsNotNull(user);
 	}
 
 	public List<Purchase> getUserOngoingPurchases(User user) {
