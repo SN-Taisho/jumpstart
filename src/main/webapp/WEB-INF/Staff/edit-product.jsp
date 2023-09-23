@@ -23,7 +23,17 @@
 
 <main>
 	<div class="width-limiter" style="padding: 0rem 2rem;">
-
+		
+		<div class="justify-center flex-col error-popup">
+			<div class="justify-between">
+				<span class="material-icons">error</span>
+				<button class="btnAnimation icon material-icons"
+					onclick="closeFormError()">close</button>
+			</div>
+			<p id="error-text" class="pFont text-center">${errorMsg }</p>
+		</div>
+		<script src="js/error-popup.js"></script>
+		
 		<div class="selection-wrapper">
 			<sec:authorize access="hasRole('Admin')">
 					<button onclick="window.location.href='user-management'">User-Management</button>
@@ -71,14 +81,12 @@
 
 				<label class="input-group flex-col" style="margin: 1rem 0rem 2rem;">Amount in stock<input
 					type="number" required autocomplete="off" name="stock" value="${stock }"
-					style="width: 200px;"
-					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+					style="width: 200px;" />
 				</label>
 				
 				<label class="input-group flex-col" style="margin: 1rem 0rem 2rem;">Price (USD) <input
 					type="number" required autocomplete="off" name="price" value="${price }"
-					style="width: 200px;"
-					oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" />
+					style="width: 200px;" />
 				</label>
 
 				<div class="justify-between flex-wrap" style="gap: 1rem;">

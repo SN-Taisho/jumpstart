@@ -2,9 +2,6 @@ package com.jumpstart.controllers;
 
 import java.math.BigDecimal;
 import java.security.Principal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -255,5 +252,20 @@ public class PurchaseController {
          System.out.println(e.getMessage());
         }
         return "redirect:/cart";
+    }
+    
+//	-----------------
+//	Pickup Management
+//	-----------------
+    @GetMapping("/pickup-management")
+    public String pickupManagementPage(Model model) {
+    	
+    	return "Staff/pickup-management";
+    }
+    
+    @GetMapping("/delivery-management")
+    public String deliveryManagementPage(Model model) {
+    	
+    	return "Staff/pickup-management";
     }
 }

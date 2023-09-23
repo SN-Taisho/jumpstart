@@ -28,11 +28,11 @@ public class CategoryService {
 		return categoryRepo.findByName(category);
 	}
 
-//	----------------
+//	-----------------------------
 //	Category Management / Display
-//	----------------
+//	-----------------------------
 	public List<Category> getAllCategories() {
-		return categoryRepo.findAll();
+		return categoryRepo.findAllByOrderByNameAsc();
 	}
 	
 	public Category getByCategoryId(Long cId) {

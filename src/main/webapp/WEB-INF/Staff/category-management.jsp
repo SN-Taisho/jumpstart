@@ -76,7 +76,7 @@
 	</div>
 </main>
 
-<dialog id="newCategoryModal" class="modal">
+<dialog id="newCategoryModal" class="modal" style="height: fit-content;">
 
 <h3 class="modal-heading">
 	Create New<br>Category
@@ -136,7 +136,7 @@ closeNewCategory.addEventListener("click", () => {
 		</label>
 
 		<button class="submit-button save btnAnimation" type="submit"
-			style="margin: 0rem auto;">Create</button>
+			style="margin: 0rem auto;">Save</button>
 
 	</sf:form>
 	<button id="closeEditCategory${item.count }"

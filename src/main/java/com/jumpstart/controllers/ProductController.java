@@ -173,40 +173,47 @@ public class ProductController {
 			@RequestParam("categoryString") String categoryString,
 			@RequestParam("fileImage") MultipartFile multipartFile, RedirectAttributes redir) throws IOException {
 
-		product.setSales(0);
-		Category assignedCategory = categoryService.findByName(categoryString);
-		product.setCategory(assignedCategory);
+		try {
+			product.setSales(0);
+			Category assignedCategory = categoryService.findByName(categoryString);
+			product.setCategory(assignedCategory);
 
-		String descText = product.getDescription();
-		String htmlFormatedText = descText.replace("\r\n", "<br />");
-		product.setDescription(htmlFormatedText);
+			String descText = product.getDescription();
+			String htmlFormatedText = descText.replace("\r\n", "<br />");
+			product.setDescription(htmlFormatedText);
 
-		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		product.setPhotos(fileName);
+			String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+			product.setPhotos(fileName);
 
-		Product savedProduct = productService.save(product);
+			Product savedProduct = productService.save(product);
 
-		String uploadDir = "./src/main/resources/static/product-images/" + savedProduct.getId();
-		Path uploadPath = Paths.get(uploadDir);
+			String uploadDir = "./src/main/resources/static/product-images/" + savedProduct.getId();
+			Path uploadPath = Paths.get(uploadDir);
 
-		if (!Files.exists(uploadPath)) {
-			Files.createDirectories(uploadPath);
+			if (!Files.exists(uploadPath)) {
+				Files.createDirectories(uploadPath);
+			}
+
+			try (InputStream inputStream = multipartFile.getInputStream()) {
+				Path filePath = uploadPath.resolve(fileName);
+				System.out.println(filePath.toFile().getAbsolutePath());
+				Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+			} catch (IOException e) {
+				throw new IOException("Could not save uploaded file: " + fileName);
+			}
+
+			product.setPhotoImagePath("/product-images/" + savedProduct.getId() + "/" + savedProduct.getPhotos());
+			productService.save(product);
+
+			String successMsg = "Product Successfully Added";
+			redir.addFlashAttribute("successMsg", successMsg);
+			return "redirect:/products";
+		} catch (Exception e) {
+			
+			String errorMsg = "Invalid Details Entered";
+			redir.addFlashAttribute("errorMsg", errorMsg);
+			return "redirect:/add-product";
 		}
-
-		try (InputStream inputStream = multipartFile.getInputStream()) {
-			Path filePath = uploadPath.resolve(fileName);
-			System.out.println(filePath.toFile().getAbsolutePath());
-			Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-		} catch (IOException e) {
-			throw new IOException("Could not save uploaded file: " + fileName);
-		}
-
-		product.setPhotoImagePath("/product-images/" + savedProduct.getId() + "/" + savedProduct.getPhotos());
-		productService.save(product);
-
-		String successMsg = "Product Successfully Added";
-		redir.addFlashAttribute("successMsg", successMsg);
-		return "redirect:/products";
 	}
 
 //	------------
@@ -237,27 +244,31 @@ public class ProductController {
 			@RequestParam("categoryString") String categoryString, @RequestParam("pId") Long pId,
 			RedirectAttributes redir) {
 
-		Product thisProduct = productService.findProduct(pId);
+		try {
+			Product thisProduct = productService.findProduct(pId);
 
-		Category assignedCategory = categoryService.findByName(categoryString);
-		product.setCategory(assignedCategory);
+			Category assignedCategory = categoryService.findByName(categoryString);
+			product.setCategory(assignedCategory);
 
-		String descText = product.getDescription();
-		String htmlFormatedText = descText.replace("\r\n", "<br />");
-		product.setDescription(htmlFormatedText);
-		
-		thisProduct.setName(product.getName());
-		thisProduct.setDescription(product.getDescription());
-		thisProduct.setCategory(product.getCategory());
-		thisProduct.setPrice(product.getPrice());
-		thisProduct.setStock(product.getStock());
+			String descText = product.getDescription();
+			String htmlFormatedText = descText.replace("\r\n", "<br />");
+			product.setDescription(htmlFormatedText);
+			
+			thisProduct.setName(product.getName());
+			thisProduct.setDescription(product.getDescription());
+			thisProduct.setCategory(product.getCategory());
+			thisProduct.setPrice(product.getPrice());
+			thisProduct.setStock(product.getStock());
 
-		productService.save(thisProduct);
+			productService.save(thisProduct);
 
-		String successMsg = thisProduct.getName() + " has been successfully updated";
-		redir.addFlashAttribute("successMsg", successMsg);
+			String successMsg = thisProduct.getName() + " has been successfully updated";
+			redir.addFlashAttribute("successMsg", successMsg);
 
-		return "redirect:product-details?pId=" + pId;
+			return "redirect:/product-details?pId=" + pId;
+		} catch (Exception e) {
+			return "redirect:/edit-product?pId=" + pId;
+		}
 	}
 
 //	--------------

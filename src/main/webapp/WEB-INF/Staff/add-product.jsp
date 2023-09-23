@@ -13,7 +13,17 @@
 
 <main>
 	<div class="width-limiter" style="padding: 0rem 2rem;">
-
+		
+		<div class="justify-center flex-col error-popup">
+			<div class="justify-between">
+				<span class="material-icons">error</span>
+				<button class="btnAnimation icon material-icons"
+					onclick="closeFormError()">close</button>
+			</div>
+			<p id="error-text" class="pFont text-center">${errorMsg }</p>
+		</div>
+		<script src="js/error-popup.js"></script>
+		
 		<div class="selection-wrapper">
 			<sec:authorize access="hasRole('Admin')">
 					<button onclick="window.location.href='user-management'">User-Management</button>
@@ -60,7 +70,7 @@
 				
 				<label class="input-group flex-col" style="margin: 1rem 0rem 2rem;">&dollar; Price<sf:input
 					type="number" step="0.01" required="true" autocomplete="off" name="price" path="price"
-					style="width: 200px;" oninput="this.value=parseInt(this.value.replace('.',''))/100"/>
+					style="width: 200px;"/>
 				</label>
 
 				<div class="input-group flex-col">
@@ -91,7 +101,7 @@
 
 				<div class="justify-between flex-wrap" style="gap: 1rem;">
 					<button class="submit-button save btnAnimation" type="submit"
-						style="margin: 1rem auto;">Save Changes</button>
+						style="margin: 1rem auto;">Save Product</button>
 					<button class="submit-button cancel btnAnimation" type="button"
 						onclick="window.history.back()" style="margin: 1rem auto;">Cancel</button>
 				</div>
