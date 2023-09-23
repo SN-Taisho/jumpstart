@@ -20,6 +20,8 @@
 			<button class="btnAnimation icon material-icons"
 				onclick="closeSuccess()">close</button>
 		</div>
+		<script src="js/success-popup.js"></script>
+		
 		
 		<div class="justify-center flex-col error-popup">
 			<div class="justify-between">
@@ -29,6 +31,7 @@
 			</div>
 			<p id="error-text" class="pFont text-center">${errorMsg }</p>
 		</div>
+		<script src="js/error-popup.js"></script>
 
 		<sec:authorize access="hasAnyRole('Admin','Staff')">
 			<div class="selection-wrapper">
@@ -161,7 +164,5 @@ closeDeleteM${item.count }.addEventListener("click", () => {
 </script>
 </c:forEach>
 
-<script src="js/success-popup.js"></script>
-<script src="js/error-popup.js"></script>
 <script src="js/cart-shake.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

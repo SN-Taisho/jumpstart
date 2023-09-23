@@ -73,9 +73,6 @@
 						</a>
 						<p>Date of purchase: ${p.ordered }</p>
 						<p class="price">&dollar; ${p.getProduct().getPrice() * p.count}</p>
-						<%-- <div class="oi-actions">
-							<button class="edit" onclick="window.location.href='purchase-details?pId=${p.id}'">View Order</button>
-						</div> --%>
 					</div>
 				</div>
 			</c:forEach>
@@ -137,5 +134,4 @@ closeEditProfile.addEventListener("click", () => {
 </script>
 
 <script src="js/validation.js"></script>
-<script src="js/error-popup.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

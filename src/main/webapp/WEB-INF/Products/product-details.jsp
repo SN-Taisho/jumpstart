@@ -32,6 +32,7 @@
 			<button class="btnAnimation icon material-icons"
 				onclick="closeSuccess()">close</button>
 		</div>
+		<script src="js/success-popup.js"></script>
 		
 		<div class="product-details-container">
 			<div class="img-wrapper">
@@ -68,6 +69,5 @@
 	</div>
 </main>
 
-<script src="js/success-popup.js"></script>
 <script src="js/cart-shake.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

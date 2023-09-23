@@ -19,6 +19,7 @@
 			</div>
 			<p id="error-text" class="pFont text-center">${errorMsg }</p>
 		</div>
+		<script src="js/error-popup.js"></script>
 		
 		<div class="tb-container align-center justify-between">
 			<div class="tb-image disappear">
@@ -49,5 +50,4 @@
 	</div>
 </main>
 <script src="js/validation.js"></script>
-<script src="js/error-popup.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

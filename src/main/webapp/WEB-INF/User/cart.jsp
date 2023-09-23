@@ -19,6 +19,7 @@
 			<button class="btnAnimation icon material-icons"
 				onclick="closeSuccess()">close</button>
 		</div>
+		<script src="js/success-popup.js"></script>
 		
 		<div class="cart-wrapper" style="margin-bottom: 3rem;">
 			<div class="item-container">
@@ -122,5 +123,4 @@ closeEditAmount${item.count }.addEventListener("click", () => {
 </script>
 </c:forEach>
 
-<script src="js/success-popup.js"></script>
 <jsp:include page="../Components/footer.jsp"></jsp:include>

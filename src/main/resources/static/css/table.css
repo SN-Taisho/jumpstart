@@ -41,6 +41,14 @@
 	vertical-align: middle;
 }
 
+.res-table a {
+	color: var(--accent);
+	text-decoration: none;
+}
+.res-table a:hover {
+	text-decoration: underline;
+}
+
 /* Table Photo */
 .table-photo .image-wrapper {
 	height: 75px;
