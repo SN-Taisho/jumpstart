@@ -33,4 +33,13 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 	        + " OR p.user.email LIKE '%' || :keyword || '%'"
 	        + " OR p.product.name LIKE '%' || :keyword || '%')")
 	List<Purchase> searchPurchases(@Param("keyword") String keyword, @Param("method") String method);
+
+	@Query(value = "SELECT p FROM Purchase p WHERE p.user = :user AND p.received IS NOT null AND ("
+	        + " p.reference LIKE '%' || :keyword || '%'"
+	        + " OR p.ordered LIKE '%' || :keyword || '%'"
+	        + " OR p.received LIKE '%' || :keyword || '%'"
+	        + " OR p.product.price LIKE '%' || :keyword || '%'"
+	        + " OR p.product.description LIKE '%' || :keyword || '%'"
+	        + " OR p.product.name LIKE '%' || :keyword || '%')")
+	List<Purchase> searchUserCompletedPurchases(@Param("user") User user, @Param("keyword") String keyword);
 }

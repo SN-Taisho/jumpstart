@@ -185,4 +185,27 @@ public class UserController {
 		return "User/ongoing-purchases";
 	}
 	
+//	----------------
+//	Purchase History
+//	----------------
+	@GetMapping("/purchase-history")
+	public String purchaseHistory(Principal principal, Model model,
+			@RequestParam(name = "search", required = false) String keyword) {
+		
+		User user = getCurrentUser(principal);
+		List<Purchase> allCompletedPurchases = null;
+		
+		if (keyword == null || keyword == "") {
+			allCompletedPurchases = purchaseService.getUserCompletedPurchases(user);
+		}
+   	
+		if (keyword != null && keyword != "") {
+			allCompletedPurchases = purchaseService.searchUserCompletedPurchases(user, keyword);
+		}
+		
+		model.addAttribute("purchases", allCompletedPurchases);
+		model.addAttribute("search", keyword);
+		return "User/purchase-history";
+	}
+	
 }

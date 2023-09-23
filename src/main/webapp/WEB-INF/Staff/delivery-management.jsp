@@ -6,7 +6,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 <jsp:include page="../Components/nav-bar.jsp">
-	<jsp:param value="Delivery Management" name="HTMLtitle" />
+	<jsp:param value="Deliveries" name="HTMLtitle" />
 </jsp:include>
 
 <div class="page-divider"></div>

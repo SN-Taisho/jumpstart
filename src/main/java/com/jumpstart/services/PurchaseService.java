@@ -41,6 +41,10 @@ public class PurchaseService {
 	public List<Purchase> getUserCompletedPurchases(User user) {
 		return purchaseRepository.findByUserAndReceivedIsNotNull(user);
 	}
+	
+	public List<Purchase> searchUserCompletedPurchases(User user, String keyword) {
+		return purchaseRepository.searchUserCompletedPurchases(user, keyword);
+	}
 
 	public List<Purchase> getUserOngoingPurchases(User user) {
 		return purchaseRepository.getUserOngoingPurchases(user);
