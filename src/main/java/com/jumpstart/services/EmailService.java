@@ -31,7 +31,7 @@ public class EmailService {
 		helper.setSubject(subject);
 		helper.setText(body, true);
 		
-//		javaMailSender.send(message);
+		javaMailSender.send(message);
 		
 		System.out.println("Email sent successfully");
 	}

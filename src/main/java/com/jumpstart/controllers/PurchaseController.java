@@ -1,10 +1,15 @@
 package com.jumpstart.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+
+import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +24,7 @@ import com.jumpstart.entities.Cart;
 import com.jumpstart.entities.Purchase;
 import com.jumpstart.entities.User;
 import com.jumpstart.services.CartService;
+import com.jumpstart.services.EmailService;
 import com.jumpstart.services.PurchaseService;
 import com.jumpstart.services.ShippingFeeService;
 import com.jumpstart.services.UserService;
@@ -40,6 +46,9 @@ public class PurchaseController {
 	
 	@Autowired
 	PurchaseService purchaseService;
+	
+	@Autowired
+	EmailService emailService;
 	
 	
 	private User getCurrentUser(Principal principal) {
@@ -158,13 +167,15 @@ public class PurchaseController {
     }
 	
 
+	private static final DecimalFormat df = new DecimalFormat("0.00");
 //	---------------------
 //	Delivery Success Link
 //	---------------------
     @GetMapping(value = DELIVERY_SUCCESS_URL)
     public String deliverySuccessPage(Principal principal, Model model,
-    		@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
-    	
+    		@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) 
+    				throws UnsupportedEncodingException, MessagingException {
+    
 		try {
 			Payment payment = paypalService.executePayment(paymentId, payerId);
 			System.out.println(payment.toJSON());
@@ -173,11 +184,23 @@ public class PurchaseController {
 
 				User user = getCurrentUser(principal);
 				List<Cart> userCart = cartService.getUserCart(user);
-
+				
 				String referenceCode = UUID.randomUUID().toString();
 				
+				String recipient = user.getEmail();
+				String subject = "Successful Purchase";
+				String body = "<h1>Your purchase was successful</h1>";
+				body += "<h2>Reference Code: " + referenceCode + "</h2>";
+				body += "<p>Thank you for choosing Jumpstart, your items will be on their way soon.</p><br>";
+				
+				int itemCount = 0;
+				Double totalWithShipping = 0.00;
 				for (Cart cartItem : userCart) {
+					itemCount += cartItem.getCount();
+					totalWithShipping += cartItem.getProduct().getPrice().doubleValue() * cartItem.getCount();
 
+					body += "<p>" + cartItem.getProduct().getName() + " &times; " + cartItem.getCount() + " </p>";
+					
 					Purchase newPurchase = new Purchase();
 
 					newPurchase.setUser(user);
@@ -192,8 +215,22 @@ public class PurchaseController {
 					
 					cartService.removeFromCart(cartItem.getId());
 				}
-				System.out.println("Successful Delivery Purchase");
 				
+				
+				Double shippingFee = shippingFeeService.getShippingFee().getShippingFee().doubleValue();
+				
+				if (itemCount > 4) {
+					totalWithShipping += shippingFee * 2;
+				}
+				else if (itemCount <= 4) {
+					totalWithShipping += shippingFee;
+				}
+				
+				df.setRoundingMode(RoundingMode.UP);
+				body += "<h3>Total:" + " &#36; " + df.format(totalWithShipping) + "</h3>";
+				emailService.sendEmail(recipient, subject, body);
+				
+				System.out.println("Successful Delivery Purchase");
 				String succesMsg = "Purchase has been placed for delivery, you may now view the order in my purchases";
 				model.addAttribute("successMsg", succesMsg);
 				model.addAttribute("method", "Delivery");
@@ -208,11 +245,12 @@ public class PurchaseController {
     
     
 //	---------------------
-//	Delivery Success Link
+//	Pickup Success Link
 //	---------------------
     @GetMapping(value = PICKUP_SUCCESS_URL)
     public String pickupSuccessPage(Principal principal, Model model,
-    		@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+    		@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) 
+    				throws UnsupportedEncodingException, MessagingException {
     	
 		try {
 			Payment payment = paypalService.executePayment(paymentId, payerId);
@@ -224,8 +262,18 @@ public class PurchaseController {
 				List<Cart> userCart = cartService.getUserCart(user);
 
 				String referenceCode = UUID.randomUUID().toString();
-
+				
+				String recipient = user.getEmail();
+				String subject = "Successful Purchase";
+				String body = "<h1>Your purchase was successful</h1>";
+				body += "<h2>Reference Code: " + referenceCode + "</h2>";
+				body += "<p>Thank you for choosing Jumpstart, you may pickup your items anytime at any Jumpstart Branch.</p><br>";
+				
+				Double total = 0.00;
 				for (Cart cartItem : userCart) {
+					total += cartItem.getProduct().getPrice().doubleValue() * cartItem.getCount();
+					
+					body += "<p>" + cartItem.getProduct().getName() + " &times; " + cartItem.getCount() + " </p>";
 
 					Purchase newPurchase = new Purchase();
 
@@ -242,6 +290,11 @@ public class PurchaseController {
 					
 					cartService.removeFromCart(cartItem.getId());
 				}
+				
+				df.setRoundingMode(RoundingMode.UP);
+				body += "<h3>Total:" + " &#36; " + df.format(total) + "</h3>";
+				emailService.sendEmail(recipient, subject, body);
+				
 				System.out.println("Successfull Pickup Purchase");
 				String succesMsg = "Purchase has been placed for pickup, you may now view the order in my purchases";
 				model.addAttribute("successMsg", succesMsg);

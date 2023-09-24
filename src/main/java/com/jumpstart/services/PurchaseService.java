@@ -39,7 +39,7 @@ public class PurchaseService {
 	}
 	
 	public List<Purchase> getUserCompletedPurchases(User user) {
-		return purchaseRepository.findByUserAndReceivedIsNotNull(user);
+		return purchaseRepository.findByUserAndReceivedIsNotNullOrderByReceivedDesc(user);
 	}
 	
 	public List<Purchase> searchUserCompletedPurchases(User user, String keyword) {

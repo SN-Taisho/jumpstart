@@ -62,7 +62,7 @@ public class AuthController {
 				user.setOTP(code);
 				userService.save(user);
 				String verifyURL = siteURL + "/verify-registration?username=" + user.getUsername();
-				String toEmail = user.getEmail();
+				String recipient = user.getEmail();
 				String subject = "Thank you joining Jumpstart";
 				String body = "<p>Dear " + user.getFullname() + ",</p>";
 				body += "<p>Thank you for joining Jumpstart, time to start your shopping for quality ethusiast grade products.</p>";
@@ -74,7 +74,7 @@ public class AuthController {
 				body += "<p>Sincerely,</p>";
 				body += "<p>Jumpstart</p>";
 
-				emailService.sendEmail(toEmail, subject, body);
+				emailService.sendEmail(recipient, subject, body);
 				System.out.println("Verification code for user " + user.getUsername() + ": " + code);
 				return "redirect:verify-registration?username=" + user.getUsername();
 			}
@@ -200,7 +200,7 @@ public class AuthController {
 			user.setOTP(code);
 			userService.updateOTP(user);
 			String verifyURL = siteURL + "/verify-email?email=" + user.getEmail();
-			String toEmail = user.getEmail();
+			String recipient = user.getEmail();
 			String subject = "ABC Jobs | Password reset";
 			String body = "<p>Dear " + user.getFullname() + ",</p>";
 			body += "<p>We have received a request to reset your password for your account. To verify your identity, please enter the one-time-pin to reset your password:</p>";
@@ -208,7 +208,7 @@ public class AuthController {
 			body += "<p>This OTP will expire in 24 hours, so please verify your identity within the day</p>";
 			body += "<p>If this request was not made by you, please contact our support team at support@abcjobs.com.</p>";
 
-			emailService.sendEmail(toEmail, subject, body);
+			emailService.sendEmail(recipient, subject, body);
 			System.out.println("Verification code for user " + user.getUsername() + ": " + code);
 			return "redirect:verify-identity?email=" + user.getEmail();
 		} 

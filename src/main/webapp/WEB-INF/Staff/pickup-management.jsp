@@ -79,7 +79,7 @@
 							<td data-label="Product">${p.getProduct().getName() }</td>
 							<td data-label="Count">${p.count }</td>
 							<td class="actions" data-label="Confirm">
-								<button id="openDeliveryM${item.count}"
+								<button id="openPickupM${item.count}"
 									class="action-btn approve" style="margin: 1rem 0rem;">
 									<i class="material-icons">check</i>
 								</button>
