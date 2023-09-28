@@ -16,7 +16,7 @@
 <main>
 	<div class="width-limiter" style="padding: 0rem 2rem;">
 
-		<form class="search-form page flex" action="purchase-history" method="get">
+		<form class="search-form page flex" action="purchase-history" method="get" style="margin-top: 2rem; margin-bottom: 2rem;">
 				<input class="search-bar" type="search" placeholder="Search Product or Reference Code"
 					name="search" value="${search}" />
 				<button class="search-btn material-icons" type="submit">search</button>
