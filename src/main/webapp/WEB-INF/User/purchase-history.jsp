@@ -28,6 +28,7 @@
 				<tr>
 					<th scope="col">No.</th>
 					<th scope="col">Reference Code</th>
+					<th scope="col">Method</th>
 					<th scope="col">Photo</th>
 					<th scope="col">Product</th>
 					<th scope="col">Count</th>
@@ -42,6 +43,7 @@
 						<tr>
 							<td data-label="No.">${item.count }</td>
 							<td data-label="Reference Code">${p.reference }</td>
+							<td data-label="Method"><p style="color: var(--accent);">${p.method }</p></td>
 							<td data-label="Photo" class="table-photo">
 								<div class="image-wrapper">
 									<img alt="${p.getProduct().getPhotos() }"
@@ -57,7 +59,7 @@
 					</c:forEach>
 				</c:if>
 				<c:if test="${empty purchases }">
-					<td colspan="8">
+					<td colspan="9">
 						<h2 class="section-heading text-center" style="color: var(--white);">No Order Found</h2>
 					</td>
 				</c:if>
