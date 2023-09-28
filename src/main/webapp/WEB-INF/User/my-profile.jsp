@@ -15,6 +15,16 @@
 	<div class="width-limiter align-center flex-col"
 		style="margin: 3rem auto 3rem; max-width: 768px; padding: 0rem 2rem;">
 		
+		<div class="justify-center flex-col error-popup">
+			<div class="justify-between">
+				<span class="material-icons">error</span>
+				<button class="btnAnimation icon material-icons"
+					onclick="closeFormError()">close</button>
+			</div>
+			<p id="error-text" class="pFont text-center">${errorMsg }</p>
+		</div>
+		<script src="js/error-popup.js"></script>
+		
 		<div class="profile-container">
 			<div class="img-wrapper">
 				<img alt="Product" src="assets/Profile.png">

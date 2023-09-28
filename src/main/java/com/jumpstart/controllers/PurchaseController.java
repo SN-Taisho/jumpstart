@@ -62,9 +62,17 @@ public class PurchaseController {
 //	Checkout Page
 //	-------------
 	@GetMapping("/checkout")
-	public String checkOutPage(Model model, Principal principal) {
+	public String checkOutPage(Model model, Principal principal, RedirectAttributes redir) {
 		
 		User user = getCurrentUser(principal);
+		
+		if (user.getMobile().isBlank() || user.getAddress().isBlank()) {
+			
+			String errorMsg = "Mobile number and address are requied before ordering, please enter edit your profile information";
+			redir.addFlashAttribute("errorMsg", errorMsg);
+			return "redirect:/my-profile";
+		}
+		
 		List<Cart> cartItems = cartService.getUserCart(user);
 		
 		if (!cartItems.isEmpty()) {
