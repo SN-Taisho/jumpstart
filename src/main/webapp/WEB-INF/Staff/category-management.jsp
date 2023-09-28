@@ -161,7 +161,7 @@ closeEditCategory${item.count }.addEventListener("click", () => {
 		class="modal" style="height: fit-content; margin-top: 25vh;">
 
 	<h3 class="modal-heading">
-		Confirm<br>Delete Product?
+		Confirm<br>Delete Category?
 	</h3>
 
 	<button class="action-btn delete btnAnimation" type="button"

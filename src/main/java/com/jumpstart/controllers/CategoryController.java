@@ -65,9 +65,8 @@ public class CategoryController {
 	@GetMapping("/delete_category")
 	public String deleteProduct(@RequestParam Long cId, RedirectAttributes redir) {
 		
-		System.out.println(cId + "Don't forget to enable me (deletion)");
-		
-		String successMsg = "Product has been successfully deleted";
+		categoryService.deleteCategoryById(cId);
+		String successMsg = "Category has been successfully deleted";
 		redir.addFlashAttribute("successMsg", successMsg);
 		
 		return "redirect:/categories";

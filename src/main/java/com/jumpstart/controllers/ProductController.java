@@ -277,8 +277,7 @@ public class ProductController {
 	@GetMapping("/delete_product")
 	public String deleteProduct(@RequestParam Long pId, RedirectAttributes redir) {
 
-		System.out.println(pId + "Don't forget to enable me (deletion)");
-
+		productService.deleteProduct(pId);
 		String successMsg = "Category has been successfully deleted";
 		redir.addFlashAttribute("successMsg", successMsg);
 

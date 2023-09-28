@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jumpstart.entities.Purchase;
 import com.jumpstart.entities.User;
+import com.jumpstart.entities.Product;
 
 @Repository
 public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
@@ -20,12 +21,15 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 	
 	List<Purchase> findByUserAndReceivedIsNotNullOrderByReceivedDesc(User user);
 	
-	@Query("SELECT p FROM Purchase p WHERE p.user = :user AND p.received IS null ORDER BY p.ordered DESC")
+	List<Purchase> findByUser(User user);
+	List<Purchase> findByProduct(Product product);
+	
+	@Query("SELECT p FROM Purchase p WHERE p.user = :user AND p.received IS NULL ORDER BY p.ordered DESC")
 	List<Purchase> getUserOngoingPurchases(@Param("user") User user);
 	
 	List<Purchase> getByMethodAndReceivedIsNull(String method);
 	
-	@Query(value = "SELECT p FROM Purchase p WHERE p.method = :method AND p.received IS null AND ("
+	@Query(value = "SELECT p FROM Purchase p WHERE p.method = :method AND p.received IS NULL AND p.user IS NOT NULL AND ("
 	        + " p.reference LIKE '%' || :keyword || '%'"
 	        + " OR p.user.fullname LIKE '%' || :keyword || '%'"
 	        + " OR p.user.username LIKE '%' || :keyword || '%'"
@@ -34,7 +38,7 @@ public interface PurchaseRepository extends JpaRepository<Purchase, Long> {
 	        + " OR p.product.name LIKE '%' || :keyword || '%')")
 	List<Purchase> searchPurchases(@Param("keyword") String keyword, @Param("method") String method);
 
-	@Query(value = "SELECT p FROM Purchase p WHERE p.user = :user AND p.received IS NOT null AND ("
+	@Query(value = "SELECT p FROM Purchase p WHERE p.user = :user AND p.received IS NOT NULL AND ("
 	        + " p.reference LIKE '%' || :keyword || '%'"
 	        + " OR p.ordered LIKE '%' || :keyword || '%'"
 	        + " OR p.received LIKE '%' || :keyword || '%'"

@@ -80,9 +80,9 @@ public class AdminController {
     public String deleteUser(@RequestParam Long uId, RedirectAttributes redir) {
     	
     	System.out.println("User UID: " + uId + "deleted");
-//		userService.deleteUser(uid);
+		userService.deleteUser(uId);
     	
-    	String successMsg = "User successfully deleted (inactive)";
+    	String successMsg = "User successfully deleted";
 		redir.addFlashAttribute("successMsg", successMsg);
 	
 	return "redirect:/user-management";

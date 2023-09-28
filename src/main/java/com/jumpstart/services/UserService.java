@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.jumpstart.entities.Purchase;
 import com.jumpstart.entities.Role;
 import com.jumpstart.entities.User;
+import com.jumpstart.repositories.PurchaseRepository;
 import com.jumpstart.repositories.RoleRepository;
 import com.jumpstart.repositories.UserRepository;
 
@@ -24,6 +26,9 @@ public class UserService {
 	
 	@Autowired
 	RoleRepository roleRepo;
+	
+	@Autowired
+	PurchaseRepository purchaseRepo;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -109,6 +114,12 @@ public class UserService {
 	}
 	
 	public void deleteUser(long uid) {
+		User user = userRepo.getById(uid);
+		List<Purchase> allUserPurchase= purchaseRepo.findByUser(user);
+		
+		for (Purchase purchase : allUserPurchase) {
+			purchaseRepo.delete(purchase);
+		}
 		userRepo.deleteById(uid);
 	}
 }

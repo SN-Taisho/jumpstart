@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.jumpstart.entities.Category;
 import com.jumpstart.entities.Product;
+import com.jumpstart.entities.Purchase;
 import com.jumpstart.repositories.CategoryRepository;
 import com.jumpstart.repositories.ProductRepository;
+import com.jumpstart.repositories.PurchaseRepository;
 
 @Service
 @Transactional
@@ -21,6 +23,9 @@ public class ProductService {
 	
 	@Autowired
 	CategoryRepository categoryRepo;
+	
+	@Autowired
+	PurchaseRepository purchaseRepo;
 	
 //	-------------
 //	Add a Product
@@ -57,6 +62,14 @@ public class ProductService {
 //	Product Management
 //	------------------
 	public void deleteProduct(Long pId) {
+		
+		Product product = productRepo.getById(pId);
+		List<Purchase> allPurchases = purchaseRepo.findByProduct(product);
+		
+		for (Purchase purchase : allPurchases) {
+			purchaseRepo.delete(purchase);
+		}
+		
 		productRepo.deleteById(pId);
 	}
 }
