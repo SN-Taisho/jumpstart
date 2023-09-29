@@ -66,7 +66,10 @@ public class PurchaseController {
 		
 		User user = getCurrentUser(principal);
 		
-		if (user.getMobile().isBlank() || user.getAddress().isBlank()) {
+		if (user.getMobile() == null 
+				|| user.getMobile().isEmpty()
+				|| user.getAddress() == null
+				|| user.getAddress().isEmpty()) {
 			
 			String errorMsg = "Mobile number and address are requied before ordering, please enter edit your profile information";
 			redir.addFlashAttribute("errorMsg", errorMsg);
