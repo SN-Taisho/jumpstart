@@ -27,45 +27,49 @@
 				<sec:authorize access="hasRole('Admin')">
 					<button onclick="window.location.href='user-management'">User-Management</button>
 				</sec:authorize>
-				<button class="default"
-					onclick="window.location.href='products'">Product-Management</button>
+				<button class="default" onclick="window.location.href='products'">Product-Management</button>
 				<button onclick="window.location.href='categories'">Categories</button>
 				<button onclick="window.location.href='add-product'">Add a
 					New Product</button>
-				<button onclick="window.location.href='pickup-management'">In-store Pickups</button>
-				<button onclick="window.location.href='delivery-management'">Delivery Orders</button>
+				<button onclick="window.location.href='pickup-management'">In-store
+					Pickups</button>
+				<button onclick="window.location.href='delivery-management'">Delivery
+					Orders</button>
 			</div>
 		</sec:authorize>
-		
+
 		<sec:authorize access="hasAnyRole('Admin','Staff')">
-		<button id="openEditShipping" class="submit-button" type="button">Edit Shipping Fee</button>
+			<button id="openEditShipping" class="submit-button" type="button">Edit
+				Shipping Fee</button>
 		</sec:authorize>
-					
+
 		<jsp:include page="../Components/category-selection.jsp"></jsp:include>
 		<section class="product-list">
 
 			<c:if test="${not empty products }">
-			<c:forEach items="${products }" var="p" varStatus="item">
-				<c:if test="${p.stock > 0}">
-					<div class="product-card">
-						<a class="card-img-wrapper" href="/product-details?pId=${p.id}">
-							<img alt="${p.photos }" src="${p.photoImagePath }" width="275">
-						</a>
-						<h3>${p.name }</h3>
-						<p class="price">&dollar;&nbsp;${p.price}</p>
-						<p class="sales">Items sold: ${p.sales }</p>
-						
-						<sec:authorize access="hasAnyRole('Admin','Staff')">
-						<p class="sales">Items in-stock: ${p.stock }</p>
-						</sec:authorize>
-						
-						<sec:authorize access="hasRole('User')">
-						<sf:form action="add_to_cart" method="post" modelAttribute="product" target="dummyframe">
-							<button class="add-to-cart" type="submit" name="id" value="${p.id }" onclick="addToCart()">
-							Add to Cart<i class="material-icons">shopping_cart</i>
-						</button>
-						</sf:form>
-						</sec:authorize>
+				<sec:authorize access="hasAnyRole('Admin', 'Staff')">
+					<c:forEach items="${products }" var="p" varStatus="item">
+						<div class="product-card">
+							<a class="card-img-wrapper" href="/product-details?pId=${p.id}">
+								<img alt="${p.photos }" src="${p.photoImagePath }" width="275">
+							</a>
+							<h3>${p.name }</h3>
+							<p class="price">&dollar;&nbsp;${p.price}</p>
+							<p class="sales">Items sold: ${p.sales }</p>
+
+							<sec:authorize access="hasAnyRole('Admin','Staff')">
+								<p class="sales">Items in-stock: ${p.stock }</p>
+							</sec:authorize>
+
+							<sec:authorize access="hasRole('User')">
+								<sf:form action="add_to_cart" method="post"
+									modelAttribute="product" target="dummyframe">
+									<button class="add-to-cart" type="submit" name="id"
+										value="${p.id }" onclick="addToCart()">
+										Add to Cart<i class="material-icons">shopping_cart</i>
+									</button>
+								</sf:form>
+							</sec:authorize>
 
 							<sec:authorize access="hasAnyRole('Admin','Staff')">
 								<div class="justify-around" style="margin-bottom: 1rem;">
@@ -73,23 +77,67 @@
 										onclick="window.location.href='edit-product?pId=${p.id}'">
 										Edit Details<i class="material-icons">edit</i>
 									</button>
-									<button id="openDeleteM${item.count }" class="action-btn delete">
+									<button id="openDeleteM${item.count }"
+										class="action-btn delete">
 										Delete<i class="material-icons">delete</i>
 									</button>
 								</div>
 							</sec:authorize>
 
 						</div>
-				</c:if>
-			</c:forEach>
+					</c:forEach>
+				</sec:authorize>
+
+				<sec:authorize access="hasRole('User')">
+					<c:forEach items="${products }" var="p" varStatus="item">
+						<c:if test="${p.stock > 0}">
+							<div class="product-card">
+								<a class="card-img-wrapper" href="/product-details?pId=${p.id}">
+									<img alt="${p.photos }" src="${p.photoImagePath }" width="275">
+								</a>
+								<h3>${p.name }</h3>
+								<p class="price">&dollar;&nbsp;${p.price}</p>
+								<p class="sales">Items sold: ${p.sales }</p>
+
+								<sec:authorize access="hasAnyRole('Admin','Staff')">
+									<p class="sales">Items in-stock: ${p.stock }</p>
+								</sec:authorize>
+
+								<sec:authorize access="hasRole('User')">
+									<sf:form action="add_to_cart" method="post"
+										modelAttribute="product" target="dummyframe">
+										<button class="add-to-cart" type="submit" name="id"
+											value="${p.id }" onclick="addToCart()">
+											Add to Cart<i class="material-icons">shopping_cart</i>
+										</button>
+									</sf:form>
+								</sec:authorize>
+
+								<sec:authorize access="hasAnyRole('Admin','Staff')">
+									<div class="justify-around" style="margin-bottom: 1rem;">
+										<button class="action-btn edit"
+											onclick="window.location.href='edit-product?pId=${p.id}'">
+											Edit Details<i class="material-icons">edit</i>
+										</button>
+										<button id="openDeleteM${item.count }"
+											class="action-btn delete">
+											Delete<i class="material-icons">delete</i>
+										</button>
+									</div>
+								</sec:authorize>
+
+							</div>
+						</c:if>
+					</c:forEach>
+				</sec:authorize>
 			</c:if>
-			
+
 			<c:if test="${empty products }">
 				<div>
 					<h2 class="section-heading text-center">No Products Available</h2>
 				</div>
 			</c:if>
-			
+
 		</section>
 		<iframe name="dummyframe" id="dummyframe" style="display: none;"></iframe>
 
@@ -97,8 +145,8 @@
 </main>
 
 <c:forEach items="${products }" var="p" varStatus="item">
-<dialog id="deleteConfM${item.count }"
-		class="modal" style="height: fit-content; margin-top: 25vh;">
+	<dialog id="deleteConfM${item.count }" class="modal"
+		style="height: fit-content; margin-top: 25vh;">
 
 	<h3 class="modal-heading">
 		Confirm<br>Delete Product?
@@ -128,10 +176,10 @@ closeDeleteM${item.count }.addEventListener("click", () => {
 </c:forEach>
 
 <sec:authorize access="hasAnyRole('Admin','Staff')">
-<dialog id="editShippingM" class="modal"
-	style="height: fit-content; margin-top: 25vh;">
+	<dialog id="editShippingM" class="modal"
+		style="height: fit-content; margin-top: 25vh;">
 
-<h3 class="modal-heading">Shipping Fee?</h3>
+	<h3 class="modal-heading">Shipping Fee?</h3>
 
 	<sf:form class="align-center flex-col form" method="post"
 		action="edit_shippingFee">
@@ -145,10 +193,10 @@ closeDeleteM${item.count }.addEventListener("click", () => {
 			style="margin: auto;">Save</button>
 	</sf:form>
 
-<button id="closeEditShipping" class="material-icons modal-close">close</button>
-</dialog>
+	<button id="closeEditShipping" class="material-icons modal-close">close</button>
+	</dialog>
 
-<script>
+	<script>
 const editShippingM = document.querySelector("#editShippingM");
 const openEditShipping = document.querySelector("#openEditShipping");
 const closeEditShipping = document.querySelector("#closeEditShipping");
